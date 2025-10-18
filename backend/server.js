@@ -1,5 +1,5 @@
 const http = require("http");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv"); // let Node read variables from .env
 dotenv.config();
 const app = require("./app");
 
