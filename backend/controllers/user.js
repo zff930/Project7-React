@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const UserModel = require("../models/user");
+const { User } = require("../models");
 
 exports.signup = (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
@@ -8,7 +8,7 @@ exports.signup = (req, res, next) => {
   bcrypt
     .hash(password, 10)
     .then((hashedPassword) => {
-      return UserModel.create({
+      return User.create({
         firstName,
         lastName,
         email,
@@ -19,7 +19,7 @@ exports.signup = (req, res, next) => {
       res.status(201).json({
         message: "User created successfully!",
         user: {
-          id: user.id,
+          id: user.userId,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
@@ -38,7 +38,7 @@ exports.login = (req, res, next) => {
   const { email, password } = req.body;
   let foundUser;
 
-  UserModel.findOne({ where: { email } })
+  User.findOne({ where: { email } })
     .then((user) => {
       if (!user) {
         return res.status(401).json({
@@ -56,7 +56,7 @@ exports.login = (req, res, next) => {
       }
 
       const token = jwt.sign(
-        { userId: foundUser.id, email: foundUser.email },
+        { userId: foundUser.userId, email: foundUser.email },
         process.env.JWT_SECRET || "RANDOM_TOKEN_SECRET", // provide a fallback if JWT_SECRET is missing in .env
         { expiresIn: "24h" }
       );
@@ -64,7 +64,7 @@ exports.login = (req, res, next) => {
       res.status(200).json({
         message: "User logged in successfully!",
         token: token,
-        userId: foundUser.id,
+        userId: foundUser.userId,
         email: foundUser.email,
       });
     })
