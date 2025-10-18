@@ -1,0 +1,7 @@
+{
+  "development": {
+    "host": "hopper.proxy.rlwy.net",
+    "port":"20409",
+    "dialect": "postgres"
+  }
+}

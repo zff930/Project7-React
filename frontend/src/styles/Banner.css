@@ -1,0 +1,22 @@
+.rp-banner {
+  color: black;
+  text-align: right;
+  padding: 32px;
+  border-bottom: solid 3px black;
+}
+
+.rp-banner-row {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rp-title {
+  padding-left: 32px;
+}
+
+.rp-logo {
+  height: 45px;
+  width: 45px;
+}
