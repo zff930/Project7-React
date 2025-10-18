@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 
-const UserModel = (sequelize, DataTypes) => {
+const User = (sequelize, DataTypes) => {
   class User extends Model {
     /**
      * Helper method for defining associations.
@@ -9,12 +9,20 @@ const UserModel = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      // e.g. User.hasMany(models.Post);
+      User.hasMany(models.Post, {
+        foreignKey: "userId",
+        as: "posts",
+        onDelete: "CASCADE", // deletes posts if user is deleted
+      });
     }
   }
   User.init(
     {
+      userId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
       firstName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -23,6 +31,7 @@ const UserModel = (sequelize, DataTypes) => {
       lastName: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: { len: [2, 30] },
       },
       email: {
         type: DataTypes.STRING,
@@ -33,12 +42,13 @@ const UserModel = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: { len: [6, 100] },
       },
     },
     {
       sequelize,
       modelName: "User",
-      tableName: "users",
+      tableName: "Users",
       timestamps: true,
     }
   );
@@ -46,4 +56,4 @@ const UserModel = (sequelize, DataTypes) => {
   return User;
 };
 
-module.exports = UserModel;
+module.exports = User;
