@@ -1,28 +1,32 @@
-const { Post, User } = require("../models");
+const { User, Post } = require("../models");
 
-// Create a post
-Post.create({
-  userId: "b37f8c92-2f7c-4f77-b48d-456de2e31456",
-  content: "This is my first post!",
-})
-  .then((newPost) => {
-    console.log("Post created:", newPost.id);
+exports.createPost = (req, res, next) => {
+  const url = req.protocol + "://" + req.get("host");
 
-    // Fetch all posts with authors
-    return Post.findAll({
-      include: [
-        {
-          model: User,
-          as: "author",
-          attributes: ["id", "username", "email"],
-        },
-      ],
+  Post.create({
+    userId: req.auth.userId,
+    content: req.body.content,
+    imageUrl: req.file ? `${url}/images/${req.file.filename}` : null,
+    likesCount: 0,
+    commentsCount: 0,
+  })
+    .then((post) => res.status(201).json({ message: "Post created successfully!", post }))
+    .catch((err) => res.status(400).json({ error: err }));
+};
+
+// GET all posts
+exports.getAllPosts = (req, res, next) => {
+  Post.findAll({
+    include: {
+      model: User,
+      as: 'author',
+      attributes: ['id', 'userId'],
+    },
+    order: [['createdAt', 'DESC']],
+  })
+    .then((posts) => res.status(200).json(posts))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to retrieve posts' });
     });
-  })
-  .then((posts) => {
-    // Convert Sequelize instances to plain objects for easier logging
-    console.log(posts.map((post) => post.toJSON()));
-  })
-  .catch((err) => {
-    console.error("Error:", err);
-  });
+};
