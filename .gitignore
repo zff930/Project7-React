@@ -1,3 +1,4 @@
 .env
-node_modules
+node_modules // can always rebuild it using npm install from package.json
 .DS_Store
+backend/images/**
