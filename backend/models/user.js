@@ -8,17 +8,17 @@ const User = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      User.hasMany(models.Post, {
-        foreignKey: "userId",
-        as: "posts",
-        onDelete: "CASCADE", // deletes posts if user is deleted
-      });
-    }
+    // static associate(models) {
+    //   User.hasMany(models.Post, {
+    //     foreignKey: "userId",
+    //     as: "posts",
+    //     onDelete: "CASCADE", // deletes posts if user is deleted
+    //   });
+    // }
   }
   User.init(
     {
-      userId: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -48,7 +48,7 @@ const User = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
-      tableName: "Users",
+      tableName: "Users1",
       timestamps: true,
     }
   );
