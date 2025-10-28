@@ -2,7 +2,7 @@
 // if user already read by display text for "if read"
 
 // import Banner from "../components/Banner";
-// import "../styles/HomePage.css";
+import "../styles/HomePage.css";
 
 function Home() {
   return (
