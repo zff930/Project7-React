@@ -20,7 +20,7 @@ exports.getAllPosts = (req, res, next) => {
     include: {
       model: User,
       as: 'author',
-      attributes: ['id', 'userId'],
+      attributes: ['id', 'firstName', 'lastName', 'email'],
     },
     order: [['createdAt', 'DESC']],
   })
