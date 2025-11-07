@@ -1,4 +1,3 @@
-// src/components/PostForm.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/PostForm.css";
@@ -7,23 +6,16 @@ const PostForm = ({ onPostSubmit }) => {
   const [content, setContent] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!content.trim()) return;
 
-    // Simulate backend call
-    const newPost = {
-      id: Date.now(),
-      user: { username: "CurrentUser" },
-      content,
-      createdAt: new Date().toISOString(),
-    };
-
-    // Pass new post content up to parent
-    onPostSubmit(content);
-    setContent("");
-
-    navigate(`/post/${newPost.id}`);
+    try {
+      await onPostSubmit(content);
+      setContent("");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
