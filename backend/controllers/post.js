@@ -1,5 +1,6 @@
 const { User, Post } = require("../models");
 
+// Create a post
 exports.createPost = async (req, res, next) => {
   try {
     const url = req.protocol + "://" + req.get("host");
@@ -29,10 +30,29 @@ exports.getAllPosts = async (req, res, next) => {
       },
       order: [["createdAt", "DESC"]],
     });
-    
+
     res.status(200).json(posts);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to retrieve posts" });
+  }
+};
+
+// Get a post
+exports.getPostById = async (req, res, next) => {
+  try {
+    const post = await Post.findByPk(req.params.id, {
+      include: {
+        model: User,
+        as: "author",
+        attributes: ["id", "firstName", "lastName", "email"],
+      },
+    });
+
+    if (!post) return res.status(404).json({ error: "Post not found" });
+    res.status(200).json(post);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to retrieve the post" });
   }
 };
