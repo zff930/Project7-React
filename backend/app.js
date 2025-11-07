@@ -27,7 +27,7 @@ const enableCors = (req, res, next) => {
 app.use(enableCors);
 app.use(express.json());
 app.use("/api/auth", userRoutes);
-app.use("/api/post", postRoutes);
+app.use("/api/posts", postRoutes);
 
 // Auto-sync database tables before starting server
 sequelize
