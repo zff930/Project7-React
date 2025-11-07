@@ -52,39 +52,56 @@
   margin-top: 0.5rem;
 }
 
-/* MOBILE ADJUSTMENTS */
-@media (max-width: 768px) {
+/* --- Responsive Layouts --- */
+
+/* Small Phones (<=375px) */
+@media (max-width: 375px) {
   .welcome {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .description {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .feed {
     padding: 0 0.5rem;
   }
-
-  .post-card {
-    padding: 0.75rem;
-  }
-
-  .post-card p {
-    font-size: 0.95rem;
-  }
-
-  .post-card small {
-    font-size: 0.8rem;
-  }
 }
 
-@media (max-width: 480px) {
+/* Tablets (768–978px) */
+@media (min-width: 768px) and (max-width: 978px) {
+  .welcome-message {
+    max-width: 900px;
+  }
+
   .welcome {
-    font-size: 1.3rem;
+    font-size: 1.75rem;
   }
 
   .description {
-    font-size: 0.95rem;
+    font-size: 1rem;
+  }
+}
+
+/* Desktop (1024–1440px) */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .welcome-message {
+    max-width: 1000px;
+  }
+
+  .welcome {
+    font-size: 2rem;
+  }
+}
+
+/* Large Desktop (1600px+) */
+@media (min-width: 1600px) {
+  .welcome-message {
+    max-width: 1200px;
+  }
+
+  .welcome {
+    font-size: 2.25rem;
   }
 }
