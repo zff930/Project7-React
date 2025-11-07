@@ -111,3 +111,84 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
+/* ==========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================== */
+
+/* --- iPhone & Small Phones (up to 375px) --- */
+@media (max-width: 375px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0.75rem;
+    margin: auto;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+/* --- Tablets (768px – 978px) --- */
+@media (min-width: 768px) and (max-width: 978px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    max-width: 900px;
+    padding: 1rem 2rem;
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+}
+
+/* --- Desktop (1024px – 1440px) --- */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+/* --- Large Desktop (1600px and above) --- */
+@media (min-width: 1600px) {
+  html {
+    font-size: 17px;
+  }
+
+  .container {
+    max-width: 1600px;
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+}
