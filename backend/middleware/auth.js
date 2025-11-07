@@ -15,11 +15,11 @@ const auth = (req, res, next) => {
     }
 
     next();
-  } catch(err) {
-    console.error("Auth middleware error:", err);
-    res.status(401).json({
-      error: "Unauthorized: Invalid token",
-    });
+  } catch (err) {
+    if (err.name === "TokenExpiredError") {
+      return res.status(401).json({ message: "Token expired" });
+    }
+    return res.status(401).json({ message: "Invalid token" });
   }
 };
 
