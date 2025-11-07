@@ -61,28 +61,32 @@
   transform: scale(0.97);
 }
 
-/* MOBILE ADJUSTMENTS */
-@media (max-width: 768px) {
+/* --- Responsive Layouts --- */
+@media (max-width: 375px) {
   .post-form {
     padding: 1rem;
+    margin: 1rem auto;
   }
 
   .post-form h3 {
     font-size: 1.1rem;
   }
+}
 
-  .post-form button {
-    width: 100%;
+@media (min-width: 768px) and (max-width: 978px) {
+  .post-form {
+    max-width: 700px;
   }
 }
 
-@media (max-width: 480px) {
-  .post-form h3 {
-    font-size: 1rem;
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .post-form {
+    max-width: 800px;
   }
+}
 
-  .post-form textarea {
-    min-height: 80px;
-    font-size: 0.95rem;
+@media (min-width: 1600px) {
+  .post-form {
+    max-width: 1000px;
   }
 }
