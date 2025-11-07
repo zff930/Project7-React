@@ -1,13 +1,48 @@
-import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-function ProtectedRoute({ children }) {
-  const token = localStorage.getItem("token");
+function ProtectedRoute() {
+  const navigate = useNavigate();
 
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
 
-  return children;
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/protected", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) {
+          const data = await res.json();
+
+          // Token expired → redirect to login
+          if (res.status === 401 && data.message === "Token expired") {
+            localStorage.removeItem("token");
+            navigate("/login");
+            return;
+          }
+
+          throw new Error(data.message || "Request failed");
+        }
+
+        console.log("Protected data:", data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, [navigate]);
+
+  return <div>Protected content</div>;
 }
 
 export default ProtectedRoute;
