@@ -10,7 +10,7 @@ const postCtrl = require("../controllers/post");
 // Add auth middleware and multer before controller.
 router.post("/", auth, multer, postCtrl.createPost);
 router.get('/', auth, postCtrl.getAllPosts);
-// router.get('/:id', auth, postCtrl.getPostById);
+router.get('/:id', auth, postCtrl.getPostById);
 
 // router.put("/:id", auth, multer, saucesCtrl.updateOneSauce);
 // router.delete("/:id", auth, saucesCtrl.deleteOneSauce);
