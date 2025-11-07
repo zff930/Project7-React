@@ -1,11 +1,90 @@
+/* HOME PAGE WRAPPER */
 .welcome-message {
-  padding-left: 25px;
+  padding: 2rem 1rem;
+  text-align: center;
 }
 
 .welcome {
-  font-size: 20px;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
 }
 
 .description {
-  font-size: 16px;
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+/* FEED / POST WRAPPER */
+.feed {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  word-wrap: break-word;
+}
+
+.post-card p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #374151;
+}
+
+.post-card small {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* POST IMAGE */
+.post-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+}
+
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .welcome {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .feed {
+    padding: 0 0.5rem;
+  }
+
+  .post-card {
+    padding: 0.75rem;
+  }
+
+  .post-card p {
+    font-size: 0.95rem;
+  }
+
+  .post-card small {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
 }
