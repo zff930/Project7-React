@@ -76,7 +76,7 @@ function Home() {
 
       {isLoggedIn ? (
         <>
-          <PostForm onPostSubmit={handleNewPost} />
+          <PostForm onPostCreated={handleNewPost} />
 
           <div className="feed">
             <h3>Feed (Latest posts first)</h3>
