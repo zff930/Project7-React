@@ -8,8 +8,12 @@ const Feed = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      const token = localStorage.getItem("token");
+
       try {
-        const res = await fetch(`${API_BASE_URL}/posts`);
+        const res = await fetch(`${API_BASE_URL}/posts`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         if (!res.ok) {
           throw new Error("Failed to fetch posts");
         }
