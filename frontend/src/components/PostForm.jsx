@@ -31,6 +31,8 @@ const PostForm = ({ onPostCreated }) => {
     formData.append("content", content);
     if (media) formData.append("media", media);
 
+    const token = localStorage.getItem("token");
+
     try {
       const res = await fetch(`${API_BASE_URL}/posts`, {
         method: "POST",
