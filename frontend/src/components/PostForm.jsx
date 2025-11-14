@@ -28,13 +28,8 @@ const PostForm = ({ onPostCreated }) => {
     }
 
     const formData = new FormData();
-    // Only append content if it's non-empty
-    if (content.trim()) {
-      formData.append("content", content);
-    }
-    if (media) {
-      formData.append("media", media);
-    }
+    if (content.trim()) formData.append("content", content.trim());
+    if (media) formData.append("media", media);
 
     const token = localStorage.getItem("token");
 
@@ -76,6 +71,7 @@ const PostForm = ({ onPostCreated }) => {
 
       <input
         type="file"
+        name="media"
         accept="image/png, image/jpeg, image/jpg, audio/mpeg, video/mp4"
         onChange={handleMediaChange}
         className="file-input"
