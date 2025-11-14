@@ -8,12 +8,13 @@ exports.createPost = async (req, res, next) => {
 
     const post = await Post.create({
       userId: req.auth.userId,
-      content: req.body.content,
+      content: String(req.body.content || ""),
       media: mediaUrl,
     });
 
     res.status(201).json({ message: "Post created successfully!", post });
   } catch (err) {
+    console.error("Create post error:", err);
     res.status(400).json({ error: err });
   }
 };
