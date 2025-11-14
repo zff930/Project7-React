@@ -40,11 +40,6 @@ const Feed = () => {
               {new Date(post.createdAt).toLocaleString()}
             </div>
             <p>{post.content}</p>
-            <div className="post-actions">
-              <button>Like</button>
-              <button>Comment</button>
-              <button>Share</button>
-            </div>
           </div>
         ))
       )}
