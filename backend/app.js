@@ -2,6 +2,7 @@ const express = require("express");
 const { sequelize } = require("./models");
 const userRoutes = require("./routers/user");
 const postRoutes = require("./routers/post");
+const protectedRoutes = require("./routers/protected");
 
 const app = express();
  
@@ -28,6 +29,7 @@ app.use(enableCors);
 app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
+app.get("/api/protected", protectedRoutes);
 
 // Auto-sync database tables before starting server
 sequelize
