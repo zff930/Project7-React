@@ -39,8 +39,8 @@ const PostPage = () => {
         Post #{post.id} by {post.author?.firstName} {post.author?.lastName}
       </h2>
       <p>{post.content}</p>
-      {post.imageUrl && (
-        <img src={post.imageUrl} alt="Post" className="post-image" />
+      {post.media && (
+        <img src={post.media} alt="Post" className="post-image" />
       )}
       <small>Posted on: {new Date(post.createdAt).toLocaleString()}</small>
     </div>
