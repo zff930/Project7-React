@@ -40,7 +40,7 @@ const PostPage = () => {
       </h2>
       <p>{post.content}</p>
       {post.media && (
-        <img src={post.media} alt="Post" className="post-image" />
+        <img src={post.media} alt="Post" className="post-media" />
       )}
       <small>Posted on: {new Date(post.createdAt).toLocaleString()}</small>
     </div>
