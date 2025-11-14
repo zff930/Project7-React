@@ -1,5 +1,6 @@
 const express = require("express");
 const { sequelize } = require("./models");
+const path = require("path");
 const userRoutes = require("./routers/user");
 const postRoutes = require("./routers/post");
 const protectedRoutes = require("./routers/protected");
@@ -27,6 +28,7 @@ const enableCors = (req, res, next) => {
 
 app.use(enableCors);
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/protected", protectedRoutes);
