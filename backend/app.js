@@ -29,7 +29,7 @@ app.use(enableCors);
 app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
-app.get("/api/protected", protectedRoutes);
+app.use("/api/protected", protectedRoutes);
 
 // Auto-sync database tables before starting server
 sequelize
