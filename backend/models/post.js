@@ -14,18 +14,6 @@ const Post = (sequelize, DataTypes) => {
         as: "author",
         onDelete: "CASCADE", // deletes post if user is deleted
       });
-
-      // Post.hasMany(models.Comment, {
-      //   foreignKey: "postId",
-      //   as: "comments",
-      //   onDelete: "CASCADE", // deletes post if user is deleted
-      // });
-
-      // Post.hasMany(models.Like, {
-      //   foreignKey: "postId",
-      //   as: "likes",
-      //   onDelete: "CASCADE", // deletes post if user is deleted
-      // });
     }
   }
   Post.init(
@@ -46,17 +34,9 @@ const Post = (sequelize, DataTypes) => {
           notEmpty: true,
         },
       },
-      imageUrl: {
+      media: {
         type: DataTypes.STRING,
         allowNull: true,
-      },
-      likesCount: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-      },
-      commentsCount: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
       },
     },
     {
