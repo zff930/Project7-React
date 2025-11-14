@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from "../config";
 import PostForm from "../components/PostForm";
 import Banner from "../components/Banner";
 import "../styles/HomePage.css";
@@ -33,35 +32,15 @@ function Home() {
       .finally(() => setLoading(false));
   }, [isLoggedIn, token]);
 
-  // When a new post is created
-  const handleNewPost = async (newContent) => {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`${API_BASE_URL}/posts`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({ content: newContent }),
-      });
+  // Called when PostForm successfully creates a post
+  const handleNewPost = (newPost) => {
+    if (!newPost) return;
 
-      if (!res.ok) {
-        throw new Error("Failed to create post");
-      }
+    // Add new post at the top of the feed
+    setPosts((prevPosts) => [newPost, ...prevPosts]);
 
-      const { post } = await res.json();
-
-      // Skip local state update if you’re going to navigate
-      // Add the new post at the top
-      // setPosts((prev) => [post, ...prev]);
-
-      // Redirect to the new post’s detail page
-      navigate(`/post/${post.id}`); // set real post id
-    } catch (err) {
-      console.error(err);
-      alert("Could not create post. Please try again later.");
-    }
+    // Redirect to the new post page
+    navigate(`/post/${newPost.id}`);
   };
 
   return (
