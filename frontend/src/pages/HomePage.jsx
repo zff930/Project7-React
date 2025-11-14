@@ -93,7 +93,7 @@ function Home() {
                     </strong>
                   </p>
                   <p>{post.content}</p>
-                  {post.imageUrl && <img src={post.imageUrl} alt="Post" />}
+                  {post.media && <img src={post.media} alt="Post" />}
                   <small>{new Date(post.createdAt).toLocaleString()}</small>
                 </div>
               ))
