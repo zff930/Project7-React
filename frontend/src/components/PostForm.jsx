@@ -71,7 +71,7 @@ const PostForm = ({ onPostCreated }) => {
 
       <input
         type="file"
-        accept="image/png, image/jpeg, audio/mpeg, video/mp4"
+        accept="image/png, image/jpeg, image/jpg, audio/mpeg, video/mp4"
         onChange={handleMediaChange}
         className="file-input"
       />
