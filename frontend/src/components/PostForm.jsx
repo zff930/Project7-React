@@ -22,14 +22,19 @@ const PostForm = ({ onPostCreated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!content.trim() && !media) {
+    if (!content && !media) {
       alert("Please enter text or upload media.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("content", content);
-    if (media) formData.append("media", media);
+    // Only append content if it's non-empty
+    if (content.trim()) {
+      formData.append("content", content);
+    }
+    if (media) {
+      formData.append("media", media);
+    }
 
     const token = localStorage.getItem("token");
 
