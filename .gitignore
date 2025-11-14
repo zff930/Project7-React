@@ -15,4 +15,4 @@ backend/.cache/
 *.cache
 
 # Images or uploads
-backend/images/
+backend/uploads/
