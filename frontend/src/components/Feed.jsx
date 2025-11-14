@@ -40,7 +40,7 @@ const Feed = () => {
         posts?.map((post) => (
           <div key={post.id} className="post-card">
             <div className="post-header">
-              <strong>{post.user?.username || "Unknown User"}</strong> ·{" "}
+              <strong>{post.author?.firstName || "Unknown User"}</strong> ·{" "}
               {new Date(post.createdAt).toLocaleString()}
             </div>
             <p>{post.content}</p>
