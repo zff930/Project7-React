@@ -29,10 +29,7 @@ const Post = (sequelize, DataTypes) => {
       },
       content: {
         type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
+        allowNull: true,
       },
       media: {
         type: DataTypes.STRING,
