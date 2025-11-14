@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ProtectedRoute() {
+function ProtectedRoute({ children }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const checkAuth = async () => {
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -21,28 +22,24 @@ function ProtectedRoute() {
         });
 
         if (!res.ok) {
-          const data = await res.json();
-
-          // Token expired → redirect to login
-          if (res.status === 401 && data.message === "Token expired") {
-            localStorage.removeItem("token");
-            navigate("/login");
-            return;
-          }
-
-          throw new Error(data.message || "Request failed");
+          // Token is invalid or expired
+          localStorage.removeItem("token");
+          navigate("/login");
+        } else {
+          setLoading(false); // Auth OK
         }
-
-        console.log("Protected data:", data);
       } catch (err) {
-        console.error(err);
+        console.error("Auth check failed", err);
+        navigate("/login");
       }
     };
 
-    fetchData();
+    checkAuth();
   }, [navigate]);
 
-  return <div>Protected content</div>;
+  if (loading) return <div>Loading...</div>;
+
+  return children;
 }
 
 export default ProtectedRoute;
