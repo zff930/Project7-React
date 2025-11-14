@@ -3,14 +3,13 @@ const { User, Post } = require("../models");
 // Create a post
 exports.createPost = async (req, res, next) => {
   try {
-    const url = req.protocol + "://" + req.get("host");
+    // const url = req.protocol + "://" + req.get("host");
+    const mediaUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const post = await Post.create({
       userId: req.auth.userId,
       content: req.body.content,
-      imageUrl: req.file ? `${url}/images/${req.file.filename}` : null,
-      likesCount: 0,
-      commentsCount: 0,
+      media: mediaUrl,
     });
 
     res.status(201).json({ message: "Post created successfully!", post });
