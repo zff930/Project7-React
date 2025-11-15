@@ -8,7 +8,7 @@ exports.createPost = async (req, res, next) => {
     console.log("req.file:", req.file); // Check uploaded media
     console.log("=============================");
 
-    const mediaUrl = req.file ? `/uploads/${req.file.filename}` : null;
+    const mediaUrl = req.file ? `http://localhost:3000/uploads/${req.file.filename}` : null;
     
     // Safely handle content
     let content = null;
