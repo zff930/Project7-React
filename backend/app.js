@@ -27,7 +27,7 @@ const enableCors = (req, res, next) => {
 
 app.use(enableCors);
 app.use(express.json());
-app.use("/uploads", express.static("uploads"));
+app.use("/api/uploads", express.static("uploads"));
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/protected", protectedRoutes);
