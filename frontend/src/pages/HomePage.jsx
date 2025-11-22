@@ -37,8 +37,11 @@ function Home() {
   const handleNewPost = (newPost) => {
     if (!newPost) return;
 
-    // Add new post at the top of the feed
-    setPosts((prevPosts) => [newPost, ...prevPosts]);
+    // Add new post at the top of the feed but filter out duplicate ones with same id
+    setPosts((prevPosts) => {
+      const filtered = prevPosts.filter((p) => p.id !== newPost.id);
+      return [newPost, ...filtered];
+    });
 
     // Redirect to the new post page
     navigate(`/post/${newPost.id}`);
