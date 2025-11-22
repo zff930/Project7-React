@@ -1,4 +1,3 @@
-const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 const { User, Post } = require("../models");
 
 // Create a post
@@ -9,7 +8,7 @@ exports.createPost = async (req, res, next) => {
     console.log("req.file:", req.file); // Check uploaded media
     console.log("=============================");
 
-    const mediaUrl = req.file ? `${BASE_URL}/uploads/${req.file.filename}` : null;
+    const mediaUrl = req.file ? `${req.protocol}://${req.get("host")}/api/uploads/${req.file.filename}` : null;
     
     // Safely handle content
     let content = null;
