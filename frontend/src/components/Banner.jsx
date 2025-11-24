@@ -17,34 +17,36 @@ function Banner() {
   };
 
   return (
-    <div>
-      <div className="banner">
-        <div className="banner-row">
-          <div className="logo-title">
-            <img src={logo} alt="React Project" className="logo" />
-            <h1 className="title">{title}</h1>
-          </div>
+    <header className="banner">
+      <div className="banner-container">
+        <div className="logo-title">
+          <img src={logo} alt="React Project" className="logo" />
+          <h1 className="title">{title}</h1>
+        </div>
 
+        <nav className="nav-bar">
           {isLoggedIn ? (
             <>
-              <Link to="/profile">
-                <button>Profile</button>
+              <Link to="/profile" className="nav-item">
+                Profile
               </Link>
-              <button onClick={handleLogout}>Log Out</button>
+              <button onClick={handleLogout} className="nav-item logout-item">
+                Log Out
+              </button>
             </>
           ) : (
             <>
-              <Link to="/signup">
-                <button>Sign Up</button>
+              <Link to="/signup" className="nav-item">
+                Sign Up
               </Link>
-              <Link to="/login">
-                <button>Log In</button>
+              <Link to="/login" className="nav-item">
+                Log In
               </Link>
             </>
           )}
-        </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 }
 
