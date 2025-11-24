@@ -1,76 +1,96 @@
-/* BANNER WRAPPER */
+/* =========================================
+   BANNER / HEADER
+   ========================================= */
+
 .banner {
   background-color: #ffffff;
   color: #111827;
-  padding: 1rem 2rem;
   border-bottom: 2px solid #e5e7eb;
-}
-
-/* FLEX ROW */
-.banner-row {
+  padding: 1.5rem 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* LOGO + TITLE */
+/* --- Centered content container --- */
+.banner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers logo/title and nav bar */
+  text-align: center;
+  width: 100%;
+  max-width: 600px; /* match home page feed/post form max width */
+}
+
+/* --- Logo + Title --- */
 .logo-title {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex: 1 1 100%;
-  justify-content: flex-start;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 0.75rem;
 }
 
 .logo {
-  height: 40px;
-  width: 40px;
+  height: 42px;
+  width: 42px;
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  letter-spacing: 0.3px;
+}
+
+/* --- Nav Bar Below Logo/Title --- */
+.nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.nav-item {
+  text-decoration: none;
   font-weight: 600;
   color: #1f2937;
-}
-
-/* BUTTONS */
-.banner-row button {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
+  transition: color 0.2s ease, transform 0.1s ease;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  background: none;
+  border: none;
+  font-family: inherit;
 }
 
-.banner-row button:hover {
-  background-color: #2563eb;
+/* Logout link styling */
+.logout-item {
+  color: #dc2626;
 }
 
-.banner-row button:active {
-  transform: scale(0.97);
+.nav-item:hover {
+  color: #2563eb;
+  transform: translateY(-1px);
 }
 
-.banner-row a {
-  text-decoration: none;
+.logout-item:hover {
+  color: #b91c1c;
 }
 
-/* --- Responsive Layouts --- */
+/* =========================================
+   RESPONSIVE LAYOUTS (match HomePage.css breakpoints)
+   ========================================= */
 
-/* Small Phones (<=375px) */
+/* --- Small Phones (<=375px) --- */
 @media (max-width: 375px) {
   .banner {
-    padding: 0.75rem;
-    text-align: center;
+    padding: 1rem 0.75rem;
   }
 
-  .banner-row {
-    flex-direction: column;
-    gap: 0.75rem;
+  .banner-container {
+    max-width: 100%;
   }
 
   .logo {
@@ -79,44 +99,59 @@
   }
 
   .title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 
-  button {
-    width: 100%;
+  .nav-bar {
+    gap: 0.75rem;
+  }
+
+  .nav-item {
+    font-size: 0.95rem;
   }
 }
 
-/* Tablets (768–978px) */
-@media (min-width: 768px) and (max-width: 978px) {
-  .banner-row {
-    max-width: 900px;
-    margin: auto;
+/* --- Tablets (768–978px) --- */
+@media (min-width: 768px) {
+  .banner-container {
+    max-width: 700px; /* same as HomePage feed/post form on tablet */
   }
 
   .title {
     font-size: 1.75rem;
   }
-}
 
-/* Desktop (1024–1440px) */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  .banner-row {
-    max-width: 1200px;
-  }
-
-  .title {
-    font-size: 1.9rem;
+  .nav-bar {
+    gap: 1rem;
   }
 }
 
-/* Large Desktop (1600px+) */
-@media (min-width: 1600px) {
-  .banner-row {
-    max-width: 1600px;
+/* --- Desktop (1024–1440px) --- */
+@media (min-width: 1024px) {
+  .banner-container {
+    max-width: 800px; /* match HomePage desktop max width */
   }
 
   .title {
     font-size: 2rem;
+  }
+
+  .nav-bar {
+    gap: 1.25rem;
+  }
+}
+
+/* --- Large Desktop (1600px+) --- */
+@media (min-width: 1600px) {
+  .banner-container {
+    max-width: 900px; /* match HomePage large desktop */
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .nav-bar {
+    gap: 1.5rem;
   }
 }
