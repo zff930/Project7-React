@@ -30,9 +30,9 @@ function Banner() {
               <Link to="/profile" className="nav-item">
                 Profile
               </Link>
-              <button onClick={handleLogout} className="nav-item logout-item">
+              <span onClick={handleLogout} className="nav-item logout-item">
                 Log Out
-              </button>
+              </span>
             </>
           ) : (
             <>
