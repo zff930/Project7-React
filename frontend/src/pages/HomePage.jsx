@@ -59,8 +59,10 @@ function Home() {
 
       {isLoggedIn ? (
         <div className="home-wrapper">
-          <PostForm onPostCreated={handleNewPost} />
-
+          <div className="post-form-wrapper">
+            <PostForm onPostCreated={handleNewPost} />
+          </div>
+          
           <div className="feed">
             <h3>Feed (Latest posts first)</h3>
             {loading ? (
