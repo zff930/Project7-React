@@ -21,6 +21,19 @@
   margin-bottom: 1.5rem;
 }
 
+/* --- Login Message (when user not logged in) --- */
+.login-message {
+  text-align: center;
+  margin: 2rem auto;
+  font-size: 1rem;
+  color: #4b5563; /* medium gray for readability */
+  line-height: 1.5;
+}
+
+.login-message p {
+  margin: 0;
+}
+
 /* --- Feed Wrapper --- */
 .feed {
   width: 100%;
@@ -117,6 +130,11 @@
 
   .description {
     font-size: 0.95rem;
+  }
+
+  .login-message {
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
   }
 
   .feed {
