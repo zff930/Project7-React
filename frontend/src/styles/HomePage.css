@@ -52,6 +52,32 @@
   margin-top: 0.5rem;
 }
 
+/* POST MEDIA (shared base styles) */
+.post-media {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+}
+
+/* IMAGE MEDIA */
+.post-media.image {
+  object-fit: cover;
+}
+
+/* VIDEO MEDIA */
+.post-media.video {
+  max-height: 480px;
+  background: #000;
+}
+
+/* AUDIO MEDIA */
+.post-media.audio {
+  width: 100%;
+  height: 40px;
+  outline: none;
+}
+
 /* --- Responsive Layouts --- */
 
 /* Small Phones (<=375px) */
