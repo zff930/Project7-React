@@ -23,7 +23,7 @@ const allowed = [
   "image/png",
   "image/jpeg",
   "image/jpg",
-  "audio/mpeg",
+  "audio/mpeg", // allows mp3
   "video/mp4",
 ];
 
