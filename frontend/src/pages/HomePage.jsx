@@ -50,69 +50,73 @@ function Home() {
   return (
     <>
       <Banner />
-      <div className="welcome-message">
-        <h1 className="welcome">Welcome to GroupomaniaConnect</h1>
-        <h2 className="description">
-          Share updates, ideas, and moments with your colleagues.
-        </h2>
-      </div>
+      <div className="home-wrapper">
+        <section className="welcome-message">
+          <h2 className="welcome">Welcome to GroupomaniaConnect</h2>
+          <p className="description">
+            Share updates, ideas, and moments with your colleagues.
+          </p>
+        </section>
 
-      {isLoggedIn ? (
-        <div className="home-wrapper">
-          <div className="post-form-wrapper">
-            <PostForm onPostCreated={handleNewPost} />
-          </div>
-          
-          <div className="feed">
-            <h3>Feed (Latest posts first)</h3>
-            {loading ? (
-              <p>Loading posts...</p>
-            ) : Array.isArray(posts) && posts.length > 0 ? (
-              posts.map((post) => (
-                <div key={post.id} className="post-card">
-                  <p>
-                    <strong>
-                      {post.author
-                        ? `${post.author.firstName} ${post.author.lastName}`
-                        : "Unknown User"}
-                    </strong>
-                  </p>
-                  <p>{post.content}</p>
-                  {post.media &&
-                    (post.media.endsWith(".mp4") ? (
-                      <div className="video-container">
-                        <video
-                          src={post.media}
-                          controls
-                          className="post-media video"
-                        />
-                      </div>
-                    ) : post.media.endsWith(".mp3") ? (
-                      <audio
-                        src={post.media}
-                        controls
-                        className="post-media audio"
-                      />
-                    ) : (
-                      <img
-                        src={post.media}
-                        alt="Post"
-                        className="post-media img"
-                      />
-                    ))}
-                  <small>{new Date(post.createdAt).toLocaleString()}</small>
-                </div>
-              ))
-            ) : (
-              <p>No posts yet</p>
-            )}
-          </div>
+        <div className="content-wrapper">
+          {isLoggedIn ? (
+            <>
+              <div className="post-form-wrapper">
+                <PostForm onPostCreated={handleNewPost} />
+              </div>
+
+              <div className="feed">
+                <h3>Feed (Latest posts first)</h3>
+                {loading ? (
+                  <p>Loading posts...</p>
+                ) : Array.isArray(posts) && posts.length > 0 ? (
+                  posts.map((post) => (
+                    <div key={post.id} className="post-card">
+                      <p>
+                        <strong>
+                          {post.author
+                            ? `${post.author.firstName} ${post.author.lastName}`
+                            : "Unknown User"}
+                        </strong>
+                      </p>
+                      <p>{post.content}</p>
+                      {post.media &&
+                        (post.media.endsWith(".mp4") ? (
+                          <div className="video-container">
+                            <video
+                              src={post.media}
+                              controls
+                              className="post-media video"
+                            />
+                          </div>
+                        ) : post.media.endsWith(".mp3") ? (
+                          <audio
+                            src={post.media}
+                            controls
+                            className="post-media audio"
+                          />
+                        ) : (
+                          <img
+                            src={post.media}
+                            alt="Post"
+                            className="post-media img"
+                          />
+                        ))}
+                      <small>{new Date(post.createdAt).toLocaleString()}</small>
+                    </div>
+                  ))
+                ) : (
+                  <p>No posts yet</p>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="login-message">
+              <p>Please log in or sign up to view posts and create content.</p>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="login-message">
-          <p>Please log in or sign up to view posts and create content.</p>
-        </div>
-      )}
+      </div>
     </>
   );
 }
