@@ -58,7 +58,7 @@ function Home() {
       </div>
 
       {isLoggedIn ? (
-        <>
+        <div className="home-wrapper">
           <PostForm onPostCreated={handleNewPost} />
 
           <div className="feed">
@@ -105,7 +105,7 @@ function Home() {
               <p>No posts yet</p>
             )}
           </div>
-        </>
+        </div>
       ) : (
         <div className="login-message">
           <p>Please log in or sign up to view posts and create content.</p>
