@@ -1,4 +1,8 @@
-/* HOME PAGE WRAPPER */
+/* =========================================
+   HOME PAGE STYLES
+   ========================================= */
+
+/* --- Welcome Section --- */
 .welcome-message {
   padding: 2rem 1rem;
   text-align: center;
@@ -17,7 +21,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* FEED / POST WRAPPER */
+/* --- Feed Wrapper --- */
 .feed {
   width: 100%;
   max-width: 600px;
@@ -25,12 +29,13 @@
   padding: 0 1rem;
 }
 
+/* --- Post Card --- */
 .post-card {
   background: #fff;
   border-radius: 10px;
   padding: 1rem;
   margin-top: 1rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   word-wrap: break-word;
 }
 
@@ -38,6 +43,7 @@
   margin: 0.5rem 0;
   font-size: 1rem;
   color: #374151;
+  line-height: 1.4;
 }
 
 .post-card small {
@@ -45,14 +51,10 @@
   font-size: 0.85rem;
 }
 
-/* POST IMAGE */
-.post-card img {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 0.5rem;
-}
+/* =========================================
+   MEDIA STYLES (Images, Video, Audio)
+   ========================================= */
 
-/* POST MEDIA (shared base styles) */
 .post-media {
   display: block;
   width: 100%;
@@ -60,27 +62,54 @@
   margin-top: 0.5rem;
 }
 
-/* IMAGE MEDIA */
+/* --- Images --- */
 .post-media.image {
-  object-fit: cover;
-}
-
-/* VIDEO MEDIA */
-.post-media.video {
-  max-height: 480px;
-  background: #000;
-}
-
-/* AUDIO MEDIA */
-.post-media.audio {
+  display: block;
   width: 100%;
-  height: 40px;
-  outline: none;
+  height: auto; /* maintain natural aspect ratio */
+  max-width: 100%; /* prevent overflow */
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  object-fit: cover; /* crops nicely if container resizes */
 }
 
-/* --- Responsive Layouts --- */
+/* --- Responsive Video Container (16:9 ratio) --- */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
 
-/* Small Phones (<=375px) */
+.video-container .post-media.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+/* --- Audio --- */
+.post-media.audio {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 40px;
+  border-radius: 6px;
+  background: #f9fafb; /* light gray backdrop for better contrast */
+  margin-top: 0.5rem;
+}
+
+/* =========================================
+   RESPONSIVE TYPOGRAPHY
+   ========================================= */
+
+/* --- Small Phones (<=375px) --- */
 @media (max-width: 375px) {
   .welcome {
     font-size: 1.4rem;
@@ -93,9 +122,25 @@
   .feed {
     padding: 0 0.5rem;
   }
+
+  .post-card p {
+    font-size: 0.9rem;
+  }
+
+  .post-card small {
+    font-size: 0.8rem;
+  }
+
+  .video-container {
+    padding-top: 75%; /* 4:3 ratio */
+  }
+
+  .post-media.audio {
+    height: 50px; /* a bit taller on mobile for touch access */
+  }
 }
 
-/* Tablets (768–978px) */
+/* --- Tablets (768–978px) --- */
 @media (min-width: 768px) and (max-width: 978px) {
   .welcome-message {
     max-width: 900px;
@@ -108,9 +153,17 @@
   .description {
     font-size: 1rem;
   }
+
+  .feed {
+    max-width: 700px;
+  }
+
+  .post-card p {
+    font-size: 1rem;
+  }
 }
 
-/* Desktop (1024–1440px) */
+/* --- Desktop (1024–1440px) --- */
 @media (min-width: 1024px) and (max-width: 1440px) {
   .welcome-message {
     max-width: 1000px;
@@ -119,9 +172,29 @@
   .welcome {
     font-size: 2rem;
   }
+
+  .description {
+    font-size: 1.1rem;
+  }
+
+  .feed {
+    max-width: 800px;
+  }
+
+  .post-card {
+    padding: 1.25rem;
+  }
+
+  .post-card p {
+    font-size: 1.05rem;
+  }
+
+  .post-card small {
+    font-size: 0.9rem;
+  }
 }
 
-/* Large Desktop (1600px+) */
+/* --- Large Desktop (1600px+) --- */
 @media (min-width: 1600px) {
   .welcome-message {
     max-width: 1200px;
@@ -129,5 +202,25 @@
 
   .welcome {
     font-size: 2.25rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .feed {
+    max-width: 900px;
+  }
+
+  .post-card {
+    padding: 1.5rem;
+  }
+
+  .post-card p {
+    font-size: 1.1rem;
+  }
+
+  .post-card small {
+    font-size: 0.95rem;
   }
 }
