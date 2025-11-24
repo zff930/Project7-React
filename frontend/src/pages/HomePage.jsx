@@ -107,7 +107,7 @@ function Home() {
           </div>
         </>
       ) : (
-        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+        <div className="login-message">
           <p>Please log in or sign up to view posts and create content.</p>
         </div>
       )}
