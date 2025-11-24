@@ -76,7 +76,22 @@ function Home() {
                     </strong>
                   </p>
                   <p>{post.content}</p>
-                  {post.media && <img src={post.media} alt="Post" />}
+                  {post.media &&
+                    (post.media.endsWith(".mp4") ? (
+                      <video
+                        src={post.media}
+                        controls
+                        className="post-media"
+                        style={{ maxWidth: "100%", borderRadius: "8px" }}
+                      />
+                    ) : (
+                      <img
+                        src={post.media}
+                        alt="Post"
+                        className="post-media"
+                        style={{ maxWidth: "100%", borderRadius: "8px" }}
+                      />
+                    ))}
                   <small>{new Date(post.createdAt).toLocaleString()}</small>
                 </div>
               ))
