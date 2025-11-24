@@ -5,7 +5,7 @@
 /* --- Home Wrapper: centers PostForm + Feed --- */
 .home-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* stack vertically */
   align-items: center; /* center horizontally */
   width: 100%;
   padding: 1rem;
@@ -15,6 +15,14 @@
 /* Space between PostForm and Feed */
 .home-wrapper > * + * {
   margin-top: 2rem;
+}
+
+/* --- PostForm & Feed wrapper alignment --- */
+.post-form-wrapper,
+.feed {
+  width: 100%;
+  max-width: 600px; /* default max width */
+  box-sizing: border-box;
 }
 
 /* --- Welcome Section --- */
@@ -48,7 +56,7 @@
   color: #374151;
   font-size: 1.05rem;
   line-height: 1.6;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   transition: background 0.3s ease;
 }
 
@@ -156,8 +164,10 @@
     padding: 0.5rem;
   }
 
-  .home-wrapper > * {
+  .post-form-wrapper,
+  .feed {
     max-width: 100%;
+    padding: 0 0.5rem;
   }
 
   .welcome {
@@ -200,6 +210,12 @@
   .home-wrapper > * {
     max-width: 700px;
   }
+
+  .post-form-wrapper,
+  .feed {
+    max-width: 700px;
+  }
+
   .welcome-message {
     max-width: 900px;
   }
@@ -226,6 +242,12 @@
   .home-wrapper > * {
     max-width: 800px;
   }
+
+  .post-form-wrapper,
+  .feed {
+    max-width: 800px;
+  }
+
   .welcome-message {
     max-width: 1000px;
   }
@@ -260,7 +282,12 @@
   .home-wrapper > * {
     max-width: 900px;
   }
-  
+
+  .post-form-wrapper,
+  .feed {
+    max-width: 900px;
+  }
+
   .welcome-message {
     max-width: 1200px;
   }
