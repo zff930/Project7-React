@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Banner from "../components/Banner";
 import "../styles/ProfilePage.css";
 
 function Profile() {
@@ -36,38 +37,41 @@ function Profile() {
   };
 
   return (
-    <div className="profile-page">
-      <h2>Your Profile</h2>
-      <div className="profile-card">
-        <p>
-          <strong>User ID:</strong> {userId}
-        </p>
-        {firstName && (
+    <>
+      <Banner />
+      <div className="profile-page">
+        <h2>Your Profile</h2>
+        <div className="profile-card">
           <p>
-            <strong>First Name:</strong> {firstName}
+            <strong>User ID:</strong> {userId}
           </p>
-        )}
-        {lastName && (
-          <p>
-            <strong>Last Name:</strong> {lastName}
-          </p>
-        )}
-        {email && (
-          <p>
-            <strong>Email:</strong> {email}
-          </p>
-        )}
+          {firstName && (
+            <p>
+              <strong>First Name:</strong> {firstName}
+            </p>
+          )}
+          {lastName && (
+            <p>
+              <strong>Last Name:</strong> {lastName}
+            </p>
+          )}
+          {email && (
+            <p>
+              <strong>Email:</strong> {email}
+            </p>
+          )}
+        </div>
+
+        <div className="profile-actions">
+          <button onClick={handleLogout} className="logout-btn">
+            Log Out
+          </button>
+          <button onClick={handleDeleteAccount} className="delete-btn">
+            Delete Account
+          </button>
+        </div>
       </div>
-      
-      <div className="profile-actions">
-        <button onClick={handleLogout} className="logout-btn">
-          Log Out
-        </button>
-        <button onClick={handleDeleteAccount} className="delete-btn">
-          Delete Account
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 
