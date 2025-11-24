@@ -78,11 +78,25 @@ function Home() {
                   <p>{post.content}</p>
                   {post.media &&
                     (post.media.endsWith(".mp4") ? (
-                      <video src={post.media} controls className="post-media video" />
+                      <div className="video-container">
+                        <video
+                          src={post.media}
+                          controls
+                          className="post-media video"
+                        />
+                      </div>
                     ) : post.media.endsWith(".mp3") ? (
-                      <audio src={post.media} controls className="post-media audio" />
+                      <audio
+                        src={post.media}
+                        controls
+                        className="post-media audio"
+                      />
                     ) : (
-                      <img src={post.media} alt="Post" className="post-media img" />
+                      <img
+                        src={post.media}
+                        alt="Post"
+                        className="post-media img"
+                      />
                     ))}
                   <small>{new Date(post.createdAt).toLocaleString()}</small>
                 </div>
