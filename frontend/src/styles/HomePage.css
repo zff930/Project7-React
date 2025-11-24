@@ -2,6 +2,21 @@
    HOME PAGE STYLES
    ========================================= */
 
+/* --- Home Wrapper: centers PostForm + Feed --- */
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center horizontally */
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Space between PostForm and Feed */
+.home-wrapper > * + * {
+  margin-top: 2rem;
+}
+
 /* --- Welcome Section --- */
 .welcome-message {
   padding: 2rem 1rem;
@@ -21,13 +36,24 @@
   margin-bottom: 1.5rem;
 }
 
-/* --- Login Message (when user not logged in) --- */
+/* --- Login message (when not logged in) --- */
 .login-message {
   text-align: center;
   margin: 2rem auto;
-  font-size: 1rem;
-  color: #4b5563; /* medium gray for readability */
-  line-height: 1.5;
+  padding: 1.5rem;
+  max-width: 600px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  color: #374151;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: background 0.3s ease;
+}
+
+.login-message:hover {
+  background: #e5e7eb;
 }
 
 .login-message p {
@@ -37,9 +63,7 @@
 /* --- Feed Wrapper --- */
 .feed {
   width: 100%;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  max-width: 600px; /* aligned with PostForm */
 }
 
 /* --- Post Card --- */
@@ -50,18 +74,22 @@
   margin-top: 1rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   word-wrap: break-word;
+  overflow: hidden;
 }
 
 .post-card p {
   margin: 0.5rem 0;
   font-size: 1rem;
   color: #374151;
-  line-height: 1.4;
+  line-height: 1.5;
+  word-wrap: break-word;
 }
 
 .post-card small {
+  display: block;
   color: #6b7280;
   font-size: 0.85rem;
+  margin-top: 0.25rem;
 }
 
 /* =========================================
@@ -124,6 +152,14 @@
 
 /* --- Small Phones (<=375px) --- */
 @media (max-width: 375px) {
+  .home-wrapper {
+    padding: 0.5rem;
+  }
+
+  .home-wrapper > * {
+    max-width: 100%;
+  }
+
   .welcome {
     font-size: 1.4rem;
   }
@@ -133,8 +169,9 @@
   }
 
   .login-message {
-    font-size: 0.9rem;
-    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    padding: 1.2rem;
+    margin: 1.5rem 1rem;
   }
 
   .feed {
@@ -160,6 +197,9 @@
 
 /* --- Tablets (768–978px) --- */
 @media (min-width: 768px) and (max-width: 978px) {
+  .home-wrapper > * {
+    max-width: 700px;
+  }
   .welcome-message {
     max-width: 900px;
   }
@@ -183,6 +223,9 @@
 
 /* --- Desktop (1024–1440px) --- */
 @media (min-width: 1024px) and (max-width: 1440px) {
+  .home-wrapper > * {
+    max-width: 800px;
+  }
   .welcome-message {
     max-width: 1000px;
   }
@@ -214,6 +257,10 @@
 
 /* --- Large Desktop (1600px+) --- */
 @media (min-width: 1600px) {
+  .home-wrapper > * {
+    max-width: 900px;
+  }
+  
   .welcome-message {
     max-width: 1200px;
   }
