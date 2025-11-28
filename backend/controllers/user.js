@@ -90,7 +90,9 @@ exports.deleteById = async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    await user.destroy();
+    // Soft delete by setting isDeleted = true
+    user.isDeleted = true;
+    await user.save();
 
     return res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
