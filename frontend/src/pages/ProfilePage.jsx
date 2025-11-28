@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Banner from "../components/Banner";
+import { API_BASE_URL } from "../config";
 import "../styles/ProfilePage.css";
 
 function Profile() {
@@ -36,7 +37,7 @@ function Profile() {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/api/users/${userId}`,
+        `${API_BASE_URL}/auth/${userId}`,
         {
           method: "DELETE",
           headers: {
