@@ -26,15 +26,34 @@ function Profile() {
   };
 
   // Handle delete account
-  const handleDeleteAccount = () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete your account? This will log you out."
-    );
-    if (confirmDelete) {
-      localStorage.clear();
-      navigate("/login");
+  const handleDeleteAccount = async () => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete your account? This action cannot be undone."
+  );
+  if (!confirmDelete) return;
+
+  try {
+    const response = await fetch(`http://localhost:3000/api/users/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`, // if your API uses auth
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete account");
     }
-  };
+
+    // Clear localStorage and redirect
+    localStorage.clear();
+    alert("Your account has been deleted.");
+    navigate("/login");
+  } catch (error) {
+    console.error("Error deleting account:", error);
+    alert("Failed to delete account. Please try again.");
+  }
+};
 
   return (
     <>
