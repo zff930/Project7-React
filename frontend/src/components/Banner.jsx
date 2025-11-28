@@ -28,6 +28,10 @@ function Banner() {
         </div>
 
         <nav className="nav-bar">
+          <span onClick={() => navigate("/")} className="nav-item home-item">
+            Home
+          </span>
+          
           {isLoggedIn ? (
             <>
               <Link to="/profile" className="nav-item">
