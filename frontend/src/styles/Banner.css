@@ -65,6 +65,16 @@
   font-family: inherit;
 }
 
+.home-item {
+  cursor: pointer;
+  color: #1f2937;
+  margin-right: 1rem;
+}
+
+.home-item:hover {
+  text-decoration: underline;
+}
+
 /* Logout link styling */
 .logout-item {
   color: #dc2626;
