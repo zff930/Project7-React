@@ -34,10 +34,7 @@ exports.signup = async (req, res, next) => {
       email: user.email,
     });
   } catch (err) {
-    console.error("Signup error:", err);
-    res.status(500).json({
-      error: "Error creating user!",
-    });
+    res.status(500).json({ error: "Error creating user!" });
   }
 };
 
@@ -47,9 +44,12 @@ exports.login = async (req, res, next) => {
 
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(401).json({
-        error: "User not found!",
-      });
+      return res.status(401).json({ error: "User not found!" });
+    }
+
+    // Prevent deleted users from logging in
+    if (user.isDeleted) {
+      return res.status(403).json({ error: "This account has been deleted." });
     }
 
     const isValid = await bcrypt.compare(password, user.password);
@@ -69,10 +69,7 @@ exports.login = async (req, res, next) => {
       email: user.email,
     });
   } catch (err) {
-    console.error("Login error:", err);
-    res.status(500).json({
-      error: "Internal Server Error!",
-    });
+    res.status(500).json({ error: "Internal Server Error!" });
   }
 };
 
@@ -96,7 +93,6 @@ exports.deleteById = async (req, res, next) => {
 
     return res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
-    console.error("Error deleting user:", err);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
