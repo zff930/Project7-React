@@ -13,6 +13,9 @@ function Banner() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+    localStorage.removeItem("email");
     navigate("/login"); // redirect to login page
   };
 
