@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Banner from "../components/Banner";
 import { API_BASE_URL } from "../config";
 
 // Reusable component for rendering media
@@ -7,7 +8,9 @@ const MediaRenderer = ({ src }) => {
   if (!src) return null;
 
   // If src is just a filename, prepend backend URL
-  const url = src.startsWith("http") ? src : `${API_BASE_URL.replace("/api", "")}/${src}`;
+  const url = src.startsWith("http")
+    ? src
+    : `${API_BASE_URL.replace("/api", "")}/${src}`;
 
   if (url.endsWith(".mp4"))
     return (
@@ -56,17 +59,20 @@ const PostPage = () => {
   if (!post) return <p>Loading post...</p>;
 
   return (
-    <div className="post-page">
-      <h2>
-        Post #{post.id} by {post.author?.firstName} {post.author?.lastName}
-      </h2>
+    <>
+      <Banner />
+      <div className="post-page">
+        <h2>
+          Post #{post.id} by {post.author?.firstName} {post.author?.lastName}
+        </h2>
 
-      <p>{post.content}</p>
+        <p>{post.content}</p>
 
-      <MediaRenderer src={post.media} />
+        <MediaRenderer src={post.media} />
 
-      <small>Posted on: {new Date(post.createdAt).toLocaleString()}</small>
-    </div>
+        <small>Posted on: {new Date(post.createdAt).toLocaleString()}</small>
+      </div>
+    </>
   );
 };
 
