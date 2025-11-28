@@ -26,10 +26,15 @@ function SignUp() {
       });
 
       const data = await response.json();
+      console.log(data);
+      
       if (!response.ok) throw new Error(data.error || "Signup failed");
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
+      localStorage.setItem("firstName", data.firstName);
+      localStorage.setItem("lastName", data.lastName);
+      localStorage.setItem("email", data.email);
 
       navigate("/");
     } catch (err) {
