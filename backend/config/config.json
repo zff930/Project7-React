@@ -1,7 +1,10 @@
 {
   "development": {
+    "username": "postgres",
+    "password": "tIeqeAkWatgOiLJvNeZAiZvPajHigkaZ",
+    "database": "railway",
     "host": "switchyard.proxy.rlwy.net",
-    "port":"59557",
+    "port": 59557,
     "dialect": "postgres"
   }
 }

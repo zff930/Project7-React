@@ -44,6 +44,10 @@ const User = (sequelize, DataTypes) => {
         allowNull: false,
         validate: { len: [6, 100] },
       },
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,
