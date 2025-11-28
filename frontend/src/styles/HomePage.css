@@ -75,6 +75,7 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   word-wrap: break-word;
   overflow: hidden;
+  cursor: pointer; /* make entire card clickable */
 }
 
 .post-card p {
@@ -90,6 +91,22 @@
   color: #6b7280;
   font-size: 0.85rem;
   margin-top: 0.25rem;
+}
+
+/* Read more link */
+.post-card .read-more {
+  color: #2563eb; /* blue */
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Read label */
+.post-card .read-label {
+  color: #16a34a; /* green */
+  font-weight: 500;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
 }
 
 /* =========================================
