@@ -15,6 +15,15 @@ function Home() {
   const token = localStorage.getItem("token");
   const isLoggedIn = !!token;
 
+  // Helper function to show only the first 10 words
+  const truncateText = (text, wordLimit = 10) => {
+    if (!text) return "";
+    const words = text.trim().split(/\s+/);
+    return words.length > wordLimit
+      ? words.slice(0, wordLimit).join(" ") + "..."
+      : text;
+  };
+
   //Fetch posts only if logged in
   useEffect(() => {
     if (!isLoggedIn) {
@@ -79,7 +88,26 @@ function Home() {
                             : "Unknown User"}
                         </strong>
                       </p>
-                      <p>{post.content}</p>
+
+                      {/* Truncated content with “Read more” link */}
+                      <p>
+                        {truncateText(post.content, 10)}{" "}
+                        {post.content &&
+                          post.content.trim().split(/\s+/).length > 10 && (
+                            <span
+                              className="read-more"
+                              onClick={() => navigate(`/post/${post.id}`)}
+                              style={{
+                                color: "#2563eb",
+                                cursor: "pointer",
+                                fontWeight: "500",
+                              }}
+                            >
+                              Read more
+                            </span>
+                          )}
+                      </p>
+
                       {post.media &&
                         (post.media.endsWith(".mp4") ? (
                           <div className="video-container">
