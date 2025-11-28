@@ -55,7 +55,7 @@ function Profile() {
       // Clear localStorage and redirect
       localStorage.clear();
       alert("Your account has been deleted.");
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error("Error deleting account:", error);
       alert("Failed to delete account. Please try again.");
