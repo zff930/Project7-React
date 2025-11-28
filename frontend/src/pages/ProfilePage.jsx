@@ -9,9 +9,9 @@ function Profile() {
   // Get user info from localStorage
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
-  const email = localStorage.getItem("email"); // if you stored email on login/signup
-  const firstName = localStorage.getItem("firstName"); // optional
-  const lastName = localStorage.getItem("lastName"); // optional
+  const email = localStorage.getItem("email");
+  const firstName = localStorage.getItem("firstName");
+  const lastName = localStorage.getItem("lastName");
 
   // Redirect to login if not logged in
   if (!token) {
@@ -31,7 +31,7 @@ function Profile() {
       "Are you sure you want to delete your account? This will log you out."
     );
     if (confirmDelete) {
-      localStorage.clear(); // remove all user info
+      localStorage.clear();
       navigate("/login");
     }
   };
