@@ -4,6 +4,7 @@ import Banner from "../components/Banner";
 import "../styles/ProfilePage.css";
 
 function Profile() {
+  const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
 
   // Get user info from localStorage
@@ -27,33 +28,40 @@ function Profile() {
 
   // Handle delete account
   const handleDeleteAccount = async () => {
-  const confirmDelete = window.confirm(
-    "Are you sure you want to delete your account? This action cannot be undone."
-  );
-  if (!confirmDelete) return;
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+    if (!confirmDelete) return;
 
-  try {
-    const response = await fetch(`http://localhost:3000/api/users/${userId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`, // if your API uses auth
-      },
-    });
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/users/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // if your API uses auth
+          },
+        }
+      );
 
-    if (!response.ok) {
-      throw new Error("Failed to delete account");
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to delete account");
+      }
+
+      // Clear localStorage and redirect
+      localStorage.clear();
+      alert("Your account has been deleted.");
+      navigate("/login");
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      alert("Failed to delete account. Please try again.");
+    } finally {
+      setLoading(false); // reset loading so buttons are clickable if needed
     }
-
-    // Clear localStorage and redirect
-    localStorage.clear();
-    alert("Your account has been deleted.");
-    navigate("/login");
-  } catch (error) {
-    console.error("Error deleting account:", error);
-    alert("Failed to delete account. Please try again.");
-  }
-};
+  };
 
   return (
     <>
@@ -82,10 +90,18 @@ function Profile() {
         </div>
 
         <div className="profile-actions">
-          <button onClick={handleLogout} className="logout-btn">
+          <button
+            onClick={handleLogout}
+            className="logout-btn"
+            disabled={loading}
+          >
             Log Out
           </button>
-          <button onClick={handleDeleteAccount} className="delete-btn">
+          <button
+            onClick={handleDeleteAccount}
+            className="delete-btn"
+            disabled={loading}
+          >
             Delete Account
           </button>
         </div>
