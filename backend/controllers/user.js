@@ -27,8 +27,10 @@ exports.signup = async (req, res, next) => {
     const token = generateToken(user);
     res.status(201).json({
       message: "User created successfully!",
-      token,
+      token: token,
       userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
     });
   } catch (err) {
@@ -62,6 +64,8 @@ exports.login = async (req, res, next) => {
       message: "User logged in successfully!",
       token: token,
       userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
     });
   } catch (err) {
