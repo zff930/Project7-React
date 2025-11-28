@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../config";
 
 function LogIn() {
-  const navigate = useNavigate(); // call hook
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const navigate = useNavigate(); // call hook
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -21,10 +21,17 @@ function LogIn() {
       });
 
       const data = await response.json();
-      console.log(data);
 
       if (!response.ok) {
-        throw new Error(data.error || "Login failed");
+        // Soft-deleted user
+        if (response.status === 403 && data.error === "This account has been deleted.") {
+          alert("Your account has been deleted and cannot log in.");
+          return; // prevent login
+        }
+
+        // Generic login failure
+        alert(data.error || "Login failed");
+        return;
       }
 
       localStorage.setItem("token", data.token);
@@ -35,8 +42,8 @@ function LogIn() {
 
       navigate("/");
     } catch (err) {
-      console.error("Login error:", err.message);
-      alert(err.message);
+      console.error(err);
+      alert("An error occurred. Please try again.");
     }
   };
 
