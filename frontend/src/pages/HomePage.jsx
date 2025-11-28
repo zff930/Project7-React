@@ -56,6 +56,28 @@ function Home() {
     navigate(`/post/${newPost.id}`);
   };
 
+  // Navigate to post page and mark as read
+  const handleClickPost = async (postId) => {
+    try {
+      // Optional: send a "mark as read" request to backend
+      await fetch(`${API_BASE_URL}/posts/${postId}/read`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (err) {
+      console.error("Error marking post as read:", err);
+    }
+
+    navigate(`/post/${postId}`);
+  };
+
+  // Check if post has been read by the user
+  const isPostRead = (post) => {
+    if (!post.readBy) return false;
+    const userId = localStorage.getItem("userId");
+    return post.readBy.includes(userId);
+  };
+
   return (
     <>
       <Banner />
@@ -87,6 +109,7 @@ function Home() {
                             ? `${post.author.firstName} ${post.author.lastName}`
                             : "Unknown User"}
                         </strong>
+                        {isPostRead && <span className="read-label">• Read</span>}
                       </p>
 
                       {/* Truncated content with “Read more” link */}
@@ -96,11 +119,9 @@ function Home() {
                           post.content.trim().split(/\s+/).length > 10 && (
                             <span
                               className="read-more"
-                              onClick={() => navigate(`/post/${post.id}`)}
-                              style={{
-                                color: "#2563eb",
-                                cursor: "pointer",
-                                fontWeight: "500",
+                              onClick={(e) => {
+                                e.stopPropagation(); // prevent triggering parent click twice
+                                handleClickPost();
                               }}
                             >
                               Read more
