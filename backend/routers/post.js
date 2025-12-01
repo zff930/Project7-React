@@ -13,7 +13,4 @@ router.get('/', auth, postCtrl.getAllPosts);
 router.get('/:id', auth, postCtrl.getPostById);
 router.post('/:id/read', auth, postCtrl.markRead);
 
-// router.put("/:id", auth, multer, saucesCtrl.updateOneSauce);
-// router.delete("/:id", auth, saucesCtrl.deleteOneSauce);
-
 module.exports = router;
