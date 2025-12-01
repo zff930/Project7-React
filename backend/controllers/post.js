@@ -8,8 +8,10 @@ exports.createPost = async (req, res, next) => {
     console.log("req.file:", req.file); // Check uploaded media
     console.log("=============================");
 
-    const mediaUrl = req.file ? `${req.protocol}://${req.get("host")}/api/uploads/${req.file.filename}` : null;
-    
+    const mediaUrl = req.file
+      ? `${req.protocol}://${req.get("host")}/api/uploads/${req.file.filename}`
+      : null;
+
     // Safely handle content
     let content = null;
     if (req.body.content) {
@@ -76,5 +78,34 @@ exports.getPostById = async (req, res, next) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to retrieve the post" });
+  }
+};
+
+// Mark a post as read
+exports.markAsRead = async (req, res, next) => {
+  try {
+    const userId = req.auth.userId;
+    const postId = req.params.id;
+
+    const post = await Post.findByPk(postId);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    const readBy = Array.isArray(post.readBy) ? [...post.readBy] : [];
+
+    if (!readBy.includes(userId)) {
+      readBy.push(userId);
+      post.readBy = readBy;
+      await post.save();
+    }
+
+    res.status(200).json({
+      message: "Post marked as read successfully.",
+      post,
+    });
+  } catch (err) {
+    console.error("Mark as read error:", err);
+    res.status(500).json({ error: "Failed to mark post as read." });
   }
 };
