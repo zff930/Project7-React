@@ -11,6 +11,6 @@ const postCtrl = require("../controllers/post");
 router.post("/", auth, multer, postCtrl.createPost);
 router.get('/', auth, postCtrl.getAllPosts);
 router.get('/:id', auth, postCtrl.getPostById);
-router.post('/:id/read', auth, postCtrl.markRead);
+router.post('/:id/markAsRead', auth, postCtrl.markAsRead);
 
 module.exports = router;
