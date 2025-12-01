@@ -35,6 +35,11 @@ const Post = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      readBy: {
+        type: DataTypes.ARRAY(DataTypes.UUID),
+        defaultValue: [],
+        allowNull: false,
+      },
     },
     {
       sequelize,
