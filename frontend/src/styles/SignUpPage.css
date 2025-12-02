@@ -1,0 +1,127 @@
+/* =========================================
+   SIGN UP PAGE STYLES
+   ========================================= */
+
+/* Page wrapper: top center alignment */
+.sign-up-page {
+  display: flex;
+  justify-content: center;  /* horizontal center */
+  align-items: flex-start;  /* align to top */
+  padding: 4rem 1rem 2rem;  /* space from top */
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+/* Form container */
+.sign-up-form {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px; /* match HomePage max-width */
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.sign-up-form h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem; /* match HomePage .welcome */
+  font-weight: 600;
+  color: black;
+}
+
+/* Inputs */
+.sign-up-form input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sign-up-form input:focus {
+  border-color: red;
+  box-shadow: none;
+}
+
+/* Button */
+.sign-up-form button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.sign-up-form button:hover {
+  background-color: red;
+}
+
+.sign-up-form button:active {
+  transform: scale(0.97);
+}
+
+/* =========================================
+   RESPONSIVE LAYOUTS (match HomePage.css)
+   ========================================= */
+
+/* Small Phones */
+@media (max-width: 375px) {
+  .sign-up-form {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+  }
+
+  .sign-up-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .sign-up-form input,
+  .sign-up-form button {
+    font-size: 0.95rem;
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .sign-up-form {
+    max-width: 700px;
+  }
+
+  .sign-up-form h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .sign-up-form {
+    max-width: 800px;
+  }
+
+  .sign-up-form h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1600px) {
+  .sign-up-form {
+    max-width: 900px;
+    padding: 2.5rem 2rem;
+  }
+
+  .sign-up-form h2 {
+    font-size: 2.25rem;
+  }
+}
