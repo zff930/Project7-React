@@ -69,7 +69,6 @@ function Home() {
   // Navigate to post page and mark as read
   const handleClickPost = async (postId) => {
     try {
-      // Send a "mark as read" request to backend
       await fetch(`${API_BASE_URL}/posts/${postId}/markAsRead`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
@@ -89,7 +88,6 @@ function Home() {
         )
       );
 
-      // Navigate to post page
       navigate(`/post/${postId}`);
     } catch (err) {
       console.error("Error marking post as read:", err);
