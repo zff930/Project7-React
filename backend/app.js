@@ -1,41 +1,32 @@
-const express = require("express");
+const express = require("express"); // express - a function used to create an Express application that handles HTTP requests.
+const cors = require("cors");
 const path = require("path");
-const { sequelize } = require("./models");
 const userRoutes = require("./routers/user");
 const postRoutes = require("./routers/post");
 const protectedRoutes = require("./routers/protected");
+const { sequelize } = require("./models"); // import Sequelize instance to connect db and sync models with db
 
-const app = express();
+const app = express(); // Express app instance to define middleware, routes, and start the server.
 
-// Enable CORS
-const enableCors = (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
+// ===============================
+// Middleware
+// ===============================
+app.use(cors); // Enable CORS for all routes
+app.use(express.json()); // Parse JSON request bodies -> req.body
+app.use("/api/uploads", express.static(path.join(__dirname, "uploads"))); // Serve static uploads
 
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-
-  next();
-};
-
-app.use(enableCors);
-app.use(express.json());
-app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
+// ===============================
+// Routes
+// ===============================
 app.use("/api/auth", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/protected", protectedRoutes);
 
-// Auto-sync database tables before starting server
+// ===============================
+// Database Sync b.f. Server Start
+// ===============================
 sequelize
-  .sync({ alter: true })
+  .sync({ alter: true }) // Automatically updates tables to match model definitions (without dropping data).
   .then(() => console.log("Database synced"))
   .catch((err) => console.error("DB sync error:", err));
 
