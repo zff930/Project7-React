@@ -34,9 +34,19 @@ exports.createPost = async (req, res, next) => {
       userId: req.auth.userId,
       content: content || null,
       media: mediaUrl,
+      readBy: [],
     });
 
-    res.status(201).json({ message: "Post created successfully!", post });
+    // Fetch it again with author included
+    const fullPost = await Post.findByPk(post.id, {
+      include: {
+        model: User,
+        as: "author",
+        attributes: ["id", "firstName", "lastName", "email"],
+      },
+    });
+
+    res.status(201).json({ message: "Post created successfully!", post: fullPost });
   } catch (err) {
     console.error("Create post error:", err);
     res.status(400).json({ error: err });
