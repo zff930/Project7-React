@@ -1,0 +1,133 @@
+/* =========================================
+   LOGIN PAGE STYLES
+   ========================================= */
+
+/* --- Page Wrapper --- */
+.log-in-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 1rem 2rem;
+  box-sizing: border-box;
+  background-color: white;
+  min-height: 100vh; /* ensures full page height */
+}
+
+/* --- Form Container --- */
+.log-in-form {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 600px; /* match HomePage max-width */
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.log-in-form h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem; /* match HomePage .welcome */
+  font-weight: 600;
+  color: black;
+}
+
+/* --- Inputs --- */
+.log-in-form input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.log-in-form input:focus {
+  border-color: red;
+  box-shadow: none;
+}
+
+/* --- Button --- */
+.log-in-form button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.log-in-form button:hover {
+  background-color: red;
+}
+
+.log-in-form button:active {
+  transform: scale(0.97);
+}
+
+/* =========================================
+   RESPONSIVE LAYOUTS (MATCH HomePage.css)
+   ========================================= */
+
+/* --- Small Phones --- */
+@media (max-width: 375px) {
+  .log-in-form {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+  }
+
+  .log-in-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .log-in-form input {
+    font-size: 0.95rem;
+  }
+
+  .log-in-form button {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* --- Tablets --- */
+@media (min-width: 768px) {
+  .log-in-form {
+    max-width: 700px;
+    padding: 2rem 1.5rem;
+  }
+
+  .log-in-form h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* --- Desktop --- */
+@media (min-width: 1024px) {
+  .log-in-form {
+    max-width: 800px;
+    padding: 2rem 1.5rem;
+  }
+
+  .log-in-form h2 {
+    font-size: 2rem;
+  }
+}
+
+/* --- Large Desktop --- */
+@media (min-width: 1600px) {
+  .log-in-form {
+    max-width: 900px;
+    padding: 2.5rem 2rem;
+  }
+
+  .log-in-form h2 {
+    font-size: 2.25rem;
+  }
+}
