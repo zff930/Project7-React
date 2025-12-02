@@ -28,7 +28,7 @@ function Banner() {
         </div>
 
         <nav className="nav-bar">
-          <span onClick={() => navigate("/")} className="nav-item home-item">
+          <span onClick={() => navigate("/")} className="nav-item">
             Home
           </span>
           
@@ -37,7 +37,7 @@ function Banner() {
               <Link to="/profile" className="nav-item">
                 Profile
               </Link>
-              <span onClick={handleLogout} className="nav-item logout-item">
+              <span onClick={handleLogout} className="nav-item">
                 Log Out
               </span>
             </>
