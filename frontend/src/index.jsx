@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'; // Give access to the newer React 18 ro
 import './styles/index.css';
 import App from './pages/App';
 
-// React app will mount at <div id="root"></div> in index.html.
+// React will inject app at <div id="root"></div> in index.html.
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // A wrapper for safer dev that activates extra checks and warnings
-  // for potential problems but gets automatically removed when app built (production).
+  // A wrapper for safer development that activates extra checks and warnings for
+  // potential problems but gets automatically removed when app built (production).
   <React.StrictMode>
     // Render React app inside root.
     <App />
