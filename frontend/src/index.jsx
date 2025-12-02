@@ -9,7 +9,6 @@ root.render(
   // A wrapper for safer development that activates extra checks and warnings for
   // potential problems but gets automatically removed when app built (production).
   <React.StrictMode>
-    // Render React app inside root.
-    <App />
+    <App /> {/* Render React app inside root. */}
   </React.StrictMode>
 );
