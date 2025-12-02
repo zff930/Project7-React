@@ -34,7 +34,7 @@ exports.createPost = async (req, res, next) => {
       userId: req.auth.userId,
       content: content || null,
       media: mediaUrl,
-      readBy: [],
+      readBy: [req.auth.userId],
     });
 
     // Fetch it again with author included
