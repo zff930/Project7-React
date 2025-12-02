@@ -9,8 +9,10 @@ import Profile from "./ProfilePage";
 
 function App() {
   return (
+    // Enable React Router to track the URL in the browser and render the correct component for each path.
     <Router>
       <Routes>
+        // When the user visits /, the Home component is rendered.
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
@@ -35,4 +37,5 @@ function App() {
   );
 }
 
+// To be rendered in index.js
 export default App;
