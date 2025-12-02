@@ -78,7 +78,7 @@
   cursor: pointer; /* make entire card clickable */
 }
 
-post-card:hover {
+.post-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
   transition: all 0.2s ease-in-out;
