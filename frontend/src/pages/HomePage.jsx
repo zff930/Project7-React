@@ -117,7 +117,7 @@ function Home() {
                 <h3>Feed (Latest posts first)</h3>
                 {loading ? (
                   <p>Loading posts...</p>
-                ) : Array.isArray(posts) && posts.length > 0 ? (
+                ) : posts.length ? (
                   posts.map((post) => (
                     <div
                       key={post.id}
