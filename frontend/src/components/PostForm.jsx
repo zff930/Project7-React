@@ -62,21 +62,33 @@ const PostForm = ({ onPostCreated }) => {
 
   return (
     <form onSubmit={handleSubmit} className="post-form">
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        className="post-input"
-        placeholder="Write something..."
-      />
+      <div className="form-group">
+        <label htmlFor="post-content" className="form-label">
+          Post Content
+        </label>
+        <textarea
+          id="post-content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className="post-input"
+          placeholder="Write something..."
+        />
+      </div>
 
-      <input
-        type="file"
-        name="media"
-        accept="image/png, image/jpeg, image/jpg, audio/mpeg, video/mp4"
-        onChange={handleMediaChange}
-        className="file-input"
-      />
-
+      <div className="form-group">
+        <label htmlFor="post-media" className="form-label">
+          Upload Media (Image, Audio, Video)
+        </label>
+        <input
+          id="post-media"
+          type="file"
+          name="media"
+          accept="image/png, image/jpeg, image/jpg, audio/mpeg, video/mp4"
+          onChange={handleMediaChange}
+          className="file-input"
+        />
+      </div>
+      
       {/* Preview area */}
       {preview && (
         <div className="media-preview">
