@@ -13,6 +13,7 @@ function Home() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
   const isLoggedIn = !!token;
 
   // Helper function to show only the first 10 words
@@ -46,36 +47,54 @@ function Home() {
   const handleNewPost = (newPost) => {
     if (!newPost) return;
 
+    // Mark as read for creator
+    const updatedPost = {
+      ...newPost,
+      readBy: [userId],
+    };
+
     // Add new post at the top of the feed but filter out duplicate ones with same id
     setPosts((prevPosts) => {
       const filtered = prevPosts.filter((p) => p.id !== newPost.id);
-      return [newPost, ...filtered];
+      return [updatedPost, ...filtered];
     });
+  };
 
-    // Redirect to the new post page
-    navigate(`/post/${newPost.id}`);
+  // Check if post has been read by the user
+  const isPostRead = (post) => {
+    if (!post.readBy || !Array.isArray(post.readBy)) return false;
+    return post.readBy.includes(userId);
   };
 
   // Navigate to post page and mark as read
   const handleClickPost = async (postId) => {
     try {
-      // Optional: send a "mark as read" request to backend
-      await fetch(`${API_BASE_URL}/posts/${postId}/read`, {
-        method: "POST",
+      // Send a "mark as read" request to backend
+      await fetch(`${API_BASE_URL}/posts/${postId}/markAsRead`, {
+        method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });
+
+      // Optimistically update local state
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === postId
+            ? {
+                ...post,
+                readBy: post.readBy
+                  ? [...new Set([...post.readBy, userId])]
+                  : [userId],
+              }
+            : post
+        )
+      );
+
+      // Navigate to post page
+      navigate(`/post/${postId}`);
     } catch (err) {
       console.error("Error marking post as read:", err);
+      navigate(`/post/${postId}`);
     }
-
-    navigate(`/post/${postId}`);
-  };
-
-  // Check if post has been read by the user
-  const isPostRead = (post) => {
-    if (!post.readBy) return false;
-    const userId = localStorage.getItem("userId");
-    return post.readBy.includes(userId);
   };
 
   return (
@@ -102,17 +121,24 @@ function Home() {
                   <p>Loading posts...</p>
                 ) : Array.isArray(posts) && posts.length > 0 ? (
                   posts.map((post) => (
-                    <div key={post.id} className="post-card">
+                    <div
+                      key={post.id}
+                      className={`post-card ${
+                        isPostRead(post) ? "read" : "unread"
+                      }`}
+                      onClick={() => handleClickPost(post.id)}
+                    >
                       <p>
                         <strong>
                           {post.author
                             ? `${post.author.firstName} ${post.author.lastName}`
                             : "Unknown User"}
                         </strong>
-                        {isPostRead && <span className="read-label">• Read</span>}
+                        {isPostRead(post) && (
+                          <span className="read-label">• Read</span>
+                        )}
                       </p>
 
-                      {/* Truncated content with “Read more” link */}
                       <p>
                         {truncateText(post.content, 10)}{" "}
                         {post.content &&
@@ -120,8 +146,8 @@ function Home() {
                             <span
                               className="read-more"
                               onClick={(e) => {
-                                e.stopPropagation(); // prevent triggering parent click twice
-                                handleClickPost();
+                                e.stopPropagation();
+                                handleClickPost(post.id);
                               }}
                             >
                               Read more
