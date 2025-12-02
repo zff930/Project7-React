@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Banner from "../components/Banner";
 import { API_BASE_URL } from "../config";
+import "../styles/SignUpPage.css";
 
 function SignUp() {
-  const navigate = useNavigate(); // call hook
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -27,7 +28,6 @@ function SignUp() {
       });
 
       const data = await response.json();
-      console.log(data);
 
       if (!response.ok) throw new Error(data.error || "Signup failed");
 
@@ -47,8 +47,8 @@ function SignUp() {
     <>
       <Banner />
       <div className="sign-up-page">
-        <h2>Sign Up</h2>
         <form onSubmit={handleSubmit} className="sign-up-form">
+          <h2>Sign Up</h2>
           <input
             type="text"
             name="firstName"
