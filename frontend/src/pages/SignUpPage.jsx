@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Banner from "../components/Banner";
 import { API_BASE_URL } from "../config";
 
 function SignUp() {
@@ -27,7 +28,7 @@ function SignUp() {
 
       const data = await response.json();
       console.log(data);
-      
+
       if (!response.ok) throw new Error(data.error || "Signup failed");
 
       localStorage.setItem("token", data.token);
@@ -43,44 +44,47 @@ function SignUp() {
   };
 
   return (
-    <div className="sign-up-page">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} className="sign-up-form">
-        <input
-          type="text"
-          name="firstName"
-          placeholder="First Name"
-          value={formData.firstName}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-          value={formData.lastName}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+    <>
+      <Banner />
+      <div className="sign-up-page">
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSubmit} className="sign-up-form">
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+    </>
   );
 }
 

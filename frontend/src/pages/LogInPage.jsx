@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Banner from "../components/Banner";
 import { API_BASE_URL } from "../config";
 
 function LogIn() {
@@ -24,7 +25,10 @@ function LogIn() {
 
       if (!response.ok) {
         // Soft-deleted user
-        if (response.status === 403 && data.error === "This account has been deleted.") {
+        if (
+          response.status === 403 &&
+          data.error === "This account has been deleted."
+        ) {
           alert("Your account has been deleted and cannot log in.");
           return; // prevent login
         }
@@ -48,28 +52,31 @@ function LogIn() {
   };
 
   return (
-    <div className="log-in-page">
-      <h2>Log In</h2>
-      <form onSubmit={handleSubmit} className="log-in-form">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={credentials.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={credentials.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Log In</button>
-      </form>
-    </div>
+    <>
+      <Banner />
+      <div className="log-in-page">
+        <h2>Log In</h2>
+        <form onSubmit={handleSubmit} className="log-in-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={credentials.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={credentials.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Log In</button>
+        </form>
+      </div>
+    </>
   );
 }
 
