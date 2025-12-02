@@ -1,10 +1,9 @@
 .post-form {
-  background-color: #fff;
-  border: 1px solid #e5e7eb;
+  background-color: white;
+  border: 1px solid black;
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -14,19 +13,23 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #1f2937;
+  color: black;
 }
 
-.post-form form {
+.post-form .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+}
+
+.post-form .form-label {
+  font-weight: 500;
+  color: black;
 }
 
 .post-form textarea {
   resize: none;
   min-height: 100px;
-  border: 1px solid #d1d5db;
+  border: 1px solid black;
   border-radius: 8px;
   padding: 0.75rem;
   font-size: 1rem;
@@ -36,13 +39,48 @@
 }
 
 .post-form textarea:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+  border-color: red;
+  outline: none;
+  box-shadow: none;
+}
+
+.post-form .file-input {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.post-form .file-input:hover {
+  border-color: red;
+  background-color: white;
+  outline: none;
+  box-shadow: none;
+}
+
+.post-form .media-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.post-form .media-preview img,
+.post-form .media-preview video {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.post-form .media-preview audio {
+  width: 100%;
+  outline: none;
 }
 
 .post-form button {
   align-self: flex-end;
-  background-color: #3b82f6;
+  background-color: black;
   color: white;
   border: none;
   border-radius: 8px;
@@ -54,7 +92,7 @@
 }
 
 .post-form button:hover {
-  background-color: #2563eb;
+  background-color: red;
 }
 
 .post-form button:active {
@@ -73,13 +111,13 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 978px) {
+@media (min-width: 768px) {
   .post-form {
     max-width: 700px;
   }
 }
 
-@media (min-width: 1024px) and (max-width: 1440px) {
+@media (min-width: 1024px) {
   .post-form {
     max-width: 800px;
   }
