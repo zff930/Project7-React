@@ -51,7 +51,6 @@ const PostForm = ({ onPostCreated }) => {
       onPostCreated(data.post);
 
       // reset form
-      onPostCreated(data.post);
       setContent("");
       setMedia(null);
       setPreview("");
