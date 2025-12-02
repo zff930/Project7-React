@@ -2,10 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Banner from "../components/Banner";
 import { API_BASE_URL } from "../config";
+import "../styles/LogInPage.css"; // make sure to create this
 
 function LogIn() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const navigate = useNavigate(); // call hook
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -24,16 +25,10 @@ function LogIn() {
       const data = await response.json();
 
       if (!response.ok) {
-        // Soft-deleted user
-        if (
-          response.status === 403 &&
-          data.error === "This account has been deleted."
-        ) {
+        if (response.status === 403 && data.error === "This account has been deleted.") {
           alert("Your account has been deleted and cannot log in.");
-          return; // prevent login
+          return;
         }
-
-        // Generic login failure
         alert(data.error || "Login failed");
         return;
       }
@@ -55,8 +50,8 @@ function LogIn() {
     <>
       <Banner />
       <div className="log-in-page">
-        <h2>Log In</h2>
         <form onSubmit={handleSubmit} className="log-in-form">
+          <h2>Log In</h2>
           <input
             type="email"
             name="email"
