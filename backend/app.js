@@ -14,7 +14,7 @@ const app = express(); // Express app instance to define middleware, routes, and
 // ===============================
 // Middleware
 // ===============================
-app.use(cors); // Enable CORS for all routes
+app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse JSON request bodies -> req.body
 app.use("/api/uploads", express.static(path.join(__dirname, "uploads"))); // __dirname = a Node.js global variable representing the current folder where 'uploads' folder lives
                                                                           // Make 'uploads' folder publicly accessible
