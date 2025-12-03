@@ -3,11 +3,6 @@ const { User, Post } = require("../models");
 // Create a post
 exports.createPost = async (req, res, next) => {
   try {
-    console.log("===== CREATE POST DEBUG =====");
-    console.log("req.body:", req.body); // Check text content
-    console.log("req.file:", req.file); // Check uploaded media
-    console.log("=============================");
-
     const mediaUrl = req.file
       ? `${req.protocol}://${req.get("host")}/api/uploads/${req.file.filename}`
       : null;
@@ -18,7 +13,7 @@ exports.createPost = async (req, res, next) => {
       if (typeof req.body.content === "string") {
         content = req.body.content.trim();
       } else if (req.body.content instanceof Object) {
-        // If somehow an object got sent, stringify it
+        // If somehow an object got sent (form serialization issues), stringify it
         content = JSON.stringify(req.body.content);
       } else {
         content = String(req.body.content);
@@ -37,7 +32,7 @@ exports.createPost = async (req, res, next) => {
       readBy: [req.auth.userId],
     });
 
-    // Fetch it again with author included
+    // Fetch it again with author included for frontend needs
     const fullPost = await Post.findByPk(post.id, {
       include: {
         model: User,
@@ -102,6 +97,8 @@ exports.markAsRead = async (req, res, next) => {
       return res.status(404).json({ error: "Post not found" });
     }
 
+    // Make a shallow copy to avoid mutating Sequelize’s internal reference.
+    // Syntax of shallow copy: spread operator
     const readBy = Array.isArray(post.readBy) ? [...post.readBy] : [];
 
     if (!readBy.includes(userId)) {
