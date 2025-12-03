@@ -1,12 +1,13 @@
-"use strict";
+"use strict"; // Enable strict mode in JS for safer coding practices.
 
-const fs = require("fs");
+const fs = require("fs"); // File system module - r/w files and directories
 const path = require("path");
-const Sequelize = require("sequelize");
-const process = require("process");
+const Sequelize = require("sequelize"); // ORM library - interact db
+const process = require("process"); // Give access to process.env and other process info
+
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/../config/config.json")[env];
+const config = require(__dirname + "/../config/config.json")[env]; // Load db config for current environment from config.json
 const db = {};
 
 // Use env variables for DB credentials if set, otherwise fallback to config.json
@@ -50,8 +51,8 @@ Object.keys(db).forEach((modelName) => {
 });
 
 // Export Sequelize instance and models
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+db.sequelize = sequelize; // database connection instance
+db.Sequelize = Sequelize; // Sequelize library itself (sometimes needed for DataTypes or operators)
 
 // Object db contains:
 // sequelize → the Sequelize instance (the database connection)
