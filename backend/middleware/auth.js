@@ -3,10 +3,12 @@ const jwt = require("jsonwebtoken");
 const auth = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
+    // jwt.verify(token, secret) does two things: 1. Checks if the token is valid and not tampered with. 2. Decodes the payload inside the token.
     const decodedToken = jwt.verify(
       token,
       process.env.JWT_SECRET || "RANDOM_TOKEN_SECRET"
     );
+    // Destructuring
     const { userId, email } = decodedToken;
     req.auth = { userId, email };
 

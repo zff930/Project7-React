@@ -3,6 +3,7 @@ const path = require("path");
 
 // Set storage location & filename
 const storage = multer.diskStorage({
+  // Saved to disk instead of memory
   destination: (req, file, callback) => {
     // first argument: whether received error, second argument: folder to save file
     callback(null, "uploads");
@@ -27,6 +28,7 @@ const allowed = [
   "video/mp4",
 ];
 
+// Validation rules for mime types
 const fileFilter = (req, file, callback) => {
   if (allowed.includes(file.mimetype)) {
     callback(null, true);
@@ -35,5 +37,5 @@ const fileFilter = (req, file, callback) => {
   }
 };
 
-// req.body be form-data with a field named "image"
+// req.body be form-data with a field named "image/audio/video"
 module.exports = multer({ storage, fileFilter }).single("media");

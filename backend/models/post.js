@@ -1,6 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model } = require("sequelize"); // Import only the Model class from Sequelize. Every Sequelize model extends this base Model class.
 
+// Allow Sequelize to dynamically load all models in 'models' folder.
 const Post = (sequelize, DataTypes) => {
   class Post extends Model {
     /**
@@ -10,7 +11,7 @@ const Post = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Post.belongsTo(models.User, {
-        foreignKey: "userId",
+        foreignKey: "userId", // FK always goes on the many side of the relationship
         as: "author",
         onDelete: "CASCADE", // deletes post if user is deleted
       });
@@ -42,14 +43,15 @@ const Post = (sequelize, DataTypes) => {
       },
     },
     {
-      sequelize,
+      sequelize, // db connection instance
       modelName: "Post",
       tableName: "Posts1",
-      timestamps: true,
+      timestamps: true, // automatically adds createdAt & updatedAt fields
     }
   );
 
   return Post;
 };
 
+// Allow models/index.js to import and initialize
 module.exports = Post;
