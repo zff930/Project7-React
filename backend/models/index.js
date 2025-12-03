@@ -53,4 +53,8 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// Object db contains:
+// sequelize → the Sequelize instance (the database connection)
+// Sequelize → the Sequelize library itself
+// Plus all your models dynamically loaded: db.User, db.Post, etc.
 module.exports = db;

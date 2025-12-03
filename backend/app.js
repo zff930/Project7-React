@@ -4,7 +4,10 @@ const path = require("path");
 const userRoutes = require("./routers/user");
 const postRoutes = require("./routers/post");
 const protectedRoutes = require("./routers/protected");
-const { sequelize } = require("./models"); // import Sequelize instance to connect db and sync models with db
+const { sequelize } = require("./models");  // Loads models/index.js automatically
+                                            // Object destructuring: import property named 'sequelize' of exported object by curly braces
+                                            //                       and assign it to variable 'sequelize'
+                                            // Sync db and run queries
 
 const app = express(); // Express app instance to define middleware, routes, and start the server.
 
