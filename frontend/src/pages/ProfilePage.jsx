@@ -1,11 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Banner from "../components/Banner";
 import { API_BASE_URL } from "../config";
 import "../styles/ProfilePage.css";
 
 function Profile() {
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // Get user info from localStorage
