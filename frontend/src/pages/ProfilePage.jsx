@@ -5,6 +5,8 @@ import { API_BASE_URL } from "../config";
 import "../styles/ProfilePage.css";
 
 function Profile() {
+  // Once loading value changes, it will reflect in all jsx components that use it.
+  // <button disabled={loading}> defines what loading means - disable button when loading
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -36,19 +38,17 @@ function Profile() {
 
     setLoading(true);
     try {
-      const res = await fetch(
-        `${API_BASE_URL}/auth/${userId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // if your API uses auth
-          },
-        }
-      );
+      const res = await fetch(`${API_BASE_URL}/auth/${userId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // if your API uses auth
+        },
+      });
+
+      const data = await res.json();
 
       if (!res.ok) {
-        const data = await res.json();
         throw new Error(data.error || "Failed to delete account");
       }
 
