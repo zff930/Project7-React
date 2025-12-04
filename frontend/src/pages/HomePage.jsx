@@ -14,7 +14,12 @@ function Home() {
   const userId = localStorage.getItem("userId");
   const isLoggedIn = !!token;
 
-  // Helper function to show only the first 10 words
+  /**
+   * 
+   * @param {*} text 
+   * @param {*} wordLimit = 10
+   * @returns the first 10 words
+   */
   const truncateText = (text, wordLimit = 10) => {
     if (!text) return "";
     // regex - match one or more consecutive whitespace characters.
@@ -56,8 +61,11 @@ function Home() {
     fetchPosts();
   }, [isLoggedIn, token]);
 
-  // Called when PostForm successfully creates a post
-  // data.post from PostForm is assigned to newPost
+  /**
+   * Called when PostForm successfully creates a post
+   * @param {*} newPost = data.post from PostForm
+   * @returns [updatedPost, ...filtered]
+   */
   const handleNewPost = (newPost) => {
     if (!newPost) return;
 
@@ -80,7 +88,10 @@ function Home() {
     return post.readBy.includes(userId);
   };
 
-  // Navigate to post page and mark as read
+  /**
+   * Mark as read for clicked post and navigate to post page
+   * @param {*} postId of the post card being clicked
+   */
   const handleClickPost = async (postId) => {
     try {
       await fetch(`${API_BASE_URL}/posts/${postId}/markAsRead`, {
@@ -103,6 +114,8 @@ function Home() {
         )
       );
 
+      // Home component unmounts, so local state changes are lost if you don’t store them elsewhere.
+      // But the backend has the updated readBy, so when you fetch posts later, the read status is correct.
       navigate(`/post/${postId}`);
     } catch (err) {
       console.error("Error marking post as read:", err);
