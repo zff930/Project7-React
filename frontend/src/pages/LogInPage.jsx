@@ -25,6 +25,7 @@ function LogIn() {
       const data = await res.json();
 
       if (!res.ok) {
+        // data.error works because {error: "error message"} is returned when user is deleted in login controller
         if (res.status === 403 && data.error === "This account has been deleted.") {
           alert("Your account has been deleted and cannot log in.");
           return;

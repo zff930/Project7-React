@@ -7,6 +7,7 @@ import "../styles/SignUpPage.css";
 function SignUp() {
   const navigate = useNavigate();
 
+  // First render triggered by value={formData.firstName}
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -14,6 +15,8 @@ function SignUp() {
     password: "",
   });
 
+  // Triggered by onChange={handleChange}
+  // Then trigger re-render
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
