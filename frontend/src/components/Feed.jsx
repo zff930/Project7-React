@@ -11,12 +11,15 @@ const Feed = () => {
       const token = localStorage.getItem("token");
 
       try {
+        // Send request to backend and backend sends res to frontend
         const res = await fetch(`${API_BASE_URL}/posts`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) {
           throw new Error("Failed to fetch posts");
         }
+        
+        // Parse res sent from backend to JS object/array
         const data = await res.json();
         setPosts(data);
       } catch (err) {
@@ -38,7 +41,7 @@ const Feed = () => {
         <p>No posts yet</p>
       ) : (
         posts?.map((post) => (
-          <div key={post.id} className="post-card">
+          <div key={post.id} className="post-card"> {/* key needed when rendering a list of elements to update specific elements in the DOM */}
             <div className="post-header">
               <strong>{post.author?.firstName || "Unknown User"}</strong> ·{" "}
               {new Date(post.createdAt).toLocaleString()}

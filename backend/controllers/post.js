@@ -60,6 +60,7 @@ exports.getAllPosts = async (req, res, next) => {
       order: [["createdAt", "DESC"]],
     });
 
+    // Send res to frontend
     res.status(200).json(posts);
   } catch (err) {
     console.error(err);
