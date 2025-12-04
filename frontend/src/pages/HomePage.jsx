@@ -30,15 +30,28 @@ function Home() {
       return;
     }
 
-    fetch(`${API_BASE_URL}/posts`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setPosts(data))
-      .catch(console.error)
-      .finally(() => setLoading(false));
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/posts`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
+        setPosts(data);
+      } catch (err) {
+        console.error("Error fetching posts:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
   }, [isLoggedIn, token]);
 
   // Called when PostForm successfully creates a post
