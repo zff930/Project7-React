@@ -17,7 +17,9 @@ function Home() {
   // Helper function to show only the first 10 words
   const truncateText = (text, wordLimit = 10) => {
     if (!text) return "";
+    // regex - match one or more consecutive whitespace characters.
     const words = text.trim().split(/\s+/);
+    // slice - array method that returns a portion (a shallow copy) of an array
     return words.length > wordLimit
       ? words.slice(0, wordLimit).join(" ") + "..."
       : text;
@@ -55,6 +57,7 @@ function Home() {
   }, [token]);
 
   // Called when PostForm successfully creates a post
+  // data.post from PostForm is assigned to newPost
   const handleNewPost = (newPost) => {
     if (!newPost) return;
 
@@ -85,7 +88,8 @@ function Home() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      // Optimistically update local state
+      // Optimistic update - mark read both on the server (via fetch) and immediately in the UI, before waiting for the server response
+      //                   - make the app feel faster and more responsive
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post.id === postId
