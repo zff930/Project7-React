@@ -4,6 +4,7 @@ import Banner from "../components/Banner";
 import { API_BASE_URL } from "../config";
 
 // Reusable component for rendering media
+// src as a prop passed from <MediaRenderer src={post.media} />, can be of diff name
 const MediaRenderer = ({ src }) => {
   if (!src) return null;
 
@@ -54,7 +55,7 @@ const PostPage = () => {
           }
         }
 
-        const data = res.json();
+        const data = await res.json();
         setPost(data);
       } catch (err) {
         setError(err.message);
