@@ -36,7 +36,7 @@ function Profile() {
 
     setLoading(true);
     try {
-      const response = await fetch(
+      const res = await fetch(
         `${API_BASE_URL}/auth/${userId}`,
         {
           method: "DELETE",
@@ -47,8 +47,8 @@ function Profile() {
         }
       );
 
-      if (!response.ok) {
-        const data = await response.json();
+      if (!res.ok) {
+        const data = await res.json();
         throw new Error(data.error || "Failed to delete account");
       }
 

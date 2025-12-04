@@ -21,15 +21,15 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+      const res = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data = await res.json();
 
-      if (!response.ok) throw new Error(data.error || "Signup failed");
+      if (!res.ok) throw new Error(data.error || "Signup failed");
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
