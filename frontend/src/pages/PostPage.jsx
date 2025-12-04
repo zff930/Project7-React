@@ -36,22 +36,31 @@ const PostPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    fetch(`${API_BASE_URL}/posts/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
+    const fetchPost = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/posts/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         if (!res.ok) {
           if (res.status === 404) throw new Error("Post not found");
           else throw new Error(`Error ${res.status}`);
         }
-        return res.json();
-      })
-      .then((data) => setPost(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
+
+        const data = res.json();
+        setPost(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
   }, [id]);
 
   if (loading) return <p>Loading post...</p>;
