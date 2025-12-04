@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Link component to navigate between pages without reloading the page
 import logo from "../assets/icon.png";
 import "../styles/Banner.css";
 
@@ -28,18 +28,18 @@ function Banner() {
         </div>
 
         <nav className="nav-bar">
-          <span onClick={() => navigate("/")} className="nav-item">
+          <Link to="/" className="nav-item">
             Home
-          </span>
-          
+          </Link>
+
           {isLoggedIn ? (
             <>
               <Link to="/profile" className="nav-item">
                 Profile
               </Link>
-              <span onClick={handleLogout} className="nav-item">
+              <Link onClick={handleLogout} className="nav-item">
                 Log Out
-              </span>
+              </Link>
             </>
           ) : (
             <>
