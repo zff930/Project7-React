@@ -47,8 +47,11 @@ const PostPage = () => {
         });
 
         if (!res.ok) {
-          if (res.status === 404) throw new Error("Post not found");
-          else throw new Error(`Error ${res.status}`);
+          if (res.status === 404) {
+            throw new Error("Post not found");
+          } else {
+            throw new Error(`Error ${res.status}`);
+          }
         }
 
         const data = res.json();
