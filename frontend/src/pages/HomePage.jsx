@@ -52,7 +52,7 @@ function Home() {
     };
 
     fetchPosts();
-  }, [isLoggedIn, token]);
+  }, [token]);
 
   // Called when PostForm successfully creates a post
   const handleNewPost = (newPost) => {
