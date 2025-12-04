@@ -1,6 +1,4 @@
-//if user already read by display text for "if read"
-
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../config";
 import PostForm from "../components/PostForm";
