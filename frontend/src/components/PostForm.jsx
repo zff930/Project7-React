@@ -11,6 +11,7 @@ const PostForm = ({ onPostCreated }) => {
     const file = e.target.files[0];
     setMedia(file);
 
+    // Even though the user just selected a file, it’s possible for files[0] to be undefined.
     if (file) {
       const previewUrl = URL.createObjectURL(file);
       setPreview(previewUrl);
@@ -39,7 +40,7 @@ const PostForm = ({ onPostCreated }) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: formData, // no JSON headers → browser sets multipart automatically
+        body: formData, // no JSON headers → browser sets request header 'Content-Type: multipart/form-data' automatically
       });
 
       if (!res.ok) {
@@ -47,7 +48,9 @@ const PostForm = ({ onPostCreated }) => {
         throw new Error(errorData.error || "Failed to create post");
       }
 
+      // returns { message: "...", post: ... }
       const data = await res.json();
+      // callback function
       onPostCreated(data.post);
 
       // reset form
@@ -101,7 +104,7 @@ const PostForm = ({ onPostCreated }) => {
           )}
 
           {media.type.startsWith("audio") && (
-            <audio controls src={preview}></audio>
+            <audio controls src={preview}></audio> /*controls as boolean attribute set to true by default to interact with audios*/
           )}
 
           {media.type.startsWith("video") && (
