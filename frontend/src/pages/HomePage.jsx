@@ -54,7 +54,7 @@ function Home() {
     };
 
     fetchPosts();
-  }, [token]);
+  }, [isLoggedIn, token]);
 
   // Called when PostForm successfully creates a post
   // data.post from PostForm is assigned to newPost
